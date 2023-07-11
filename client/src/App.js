@@ -1,8 +1,15 @@
-import "./StyleSheets/App.css";
+import axios from "axios";
+// HOOK'S
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+// CSS
+import "./StyleSheets/App.css";
+// COMPONENTS
 import Nav from "./Components/Nav";
 import Cards from "./Components/Cards";
-import axios from "axios";
+import About from "./Components/About";
+import Detail from "./Components/Deatil";
+import Error from "./Components/Error";
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -43,7 +50,15 @@ function App() {
   return (
     <div className="App">
       <Nav onSearch={onSearch} />
-      <Cards characters={characters} onClose={onClose} />
+      <Routes>
+        <Route
+          path="/home"
+          element={<Cards characters={characters} onClose={onClose} />}
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path=":id" element={<Error />} />
+      </Routes>
     </div>
   );
 }

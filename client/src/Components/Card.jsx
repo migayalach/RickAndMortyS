@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../StyleSheets/Card.css";
 
 export default function Card({id, name, species, gender, image, onClose }) {
@@ -10,7 +11,9 @@ export default function Card({id, name, species, gender, image, onClose }) {
           onClick={()=>onClose(id)}
         > X </button>
       </div>
-      <h2 className="nombre">{name}</h2>
+      <Link to={`/detail/${id}`}>
+        <h2 className="nombre">{name}</h2>
+      </Link>
       <img className="imagen" src={image} alt={name} />
       <div className="pie-de-pagina">
         <h2 className="datos">{species}</h2>
