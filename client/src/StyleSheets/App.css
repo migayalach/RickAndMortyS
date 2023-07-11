@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+}
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1b1b32;
+  color: #fff;
+  font-size: 20px;
+  font-family: Roboto, sans-serif;
+}

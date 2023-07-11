@@ -1,0 +1,40 @@
+.barra-de-navegacion {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  /* width: 25%;*/
+  background-color: #f9f7f3;
+  border-radius: 5px;
+  padding: 15px;
+  opacity: .9;
+}
+
+.busqueda {
+  font-size: 25px;
+  border: medium solid #6c757d;
+  color: #000;
+  text-align: left;
+  padding: 4px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+
+.aceptar {
+  background-color: #ff9f1c;
+  color: #073b4c;
+  width: 145px;
+  height: 40px;
+  font-size: 28px;
+  font-weight: bold;
+  border-radius: 10px;
+  margin-left: 20px;
+  transition: 0.8s;
+  cursor: pointer;
+  user-select: none;
+}
+
+.aceptar:hover {
+  background-color: #02c39a;
+  color: #f0ead2;
+}
