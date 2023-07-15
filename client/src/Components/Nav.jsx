@@ -19,6 +19,9 @@ const Nav = ({ onSearch, logout }) => {
       <button>
         <NavLink to="/home">Home</NavLink>
       </button>
+      <button>
+        <NavLink to="/favorites">Favoritos</NavLink>
+      </button>
       <button onClick={handleLogout}>Salir</button>
     </div>
   );

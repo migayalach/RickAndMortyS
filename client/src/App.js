@@ -11,6 +11,7 @@ import About from "./Components/About";
 import Detail from "./Components/Deatil";
 import Error from "./Components/Error";
 import Form from "./Components/Form";
+import Favorites from "./Components/Favorites";
 
 function App() {
   const location = useLocation();
@@ -80,6 +81,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path=":id" element={<Error />} />
+        <Route path="/favorites" element={<Favorites/>} />
       </Routes>
     </div>
   );
