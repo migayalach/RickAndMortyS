@@ -1,13 +1,13 @@
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import Card from "./Card";
 
-const Favorites = ({ myFavorites }) => {
+const Favorites = () => {
+  const recipe = useSelector((state) => state.myFavorites);
   return (
     <div>
       <h1>Favoritos</h1>
-      {
-      myFavorites?.map((favoritos)=>{
-        return(
+      {recipe?.map((favoritos) => {
+        return (
           <Card
             key={favoritos.id}
             id={favoritos.id}
@@ -16,18 +16,11 @@ const Favorites = ({ myFavorites }) => {
             gender={favoritos.gender}
             image={favoritos.image}
             onClose={favoritos.onClose}
-         />
+          />
         );
-      })
-    }
+      })}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    myFavorites: state.myFavorites,
-  };
-};
-
-export default connect(mapStateToProps, null)(Favorites);
+export default Favorites;
