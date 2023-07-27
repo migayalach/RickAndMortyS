@@ -14,9 +14,6 @@ export default function Cards({ characters, onClose }) {
             gender={personaje.gender}
             image={personaje.image}
             onClose={onClose}
-            // status={personaje.status}
-            // id={personaje.id}
-            // origin={personaje.origin}
           />
         );
       })}

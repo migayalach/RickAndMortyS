@@ -1,5 +1,6 @@
 import { useState } from "react";
 import validation from "../Utils/validation";
+import "../StyleSheets/Form.css"
 
 const Form = ({ login }) => {
   const [userData, setUserData] = useState({
@@ -25,24 +26,39 @@ const Form = ({ login }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="email">EMAIL:</label>
-      <input
-        type="text"
-        value={userData.email}
-        name="email"
-        onChange={handleChange}
-      />
-      {errors.email && <p>{errors.email}</p>}
-      <label htmlFor="password">PASSWORD</label>
-      <input
-        type="text"
-        value={userData.password}
-        name="password"
-        onChange={handleChange}
-      />
-      {errors.password && <p>{errors.password}</p>}
-      <button>SUBMIT</button>
+    <form className="form-component" onSubmit={handleSubmit}>
+        <img
+          className="logo"
+          src={require(`../image/Rick-And-Morty.png`)}
+          alt="Login Rick"
+        />
+        <label className="texto" htmlFor="email">
+          Email:
+        </label>
+        <input
+          type="text"
+          value={userData.email}
+          name="email"
+          onChange={handleChange}
+          placeholder="abc@gmail.com"
+          required
+        />
+        {errors.email && <p className="error">{errors.email}</p>}
+
+        <label className="texto" htmlFor="password">
+          Password
+        </label>
+        <input
+          type="password"
+          value={userData.password}
+          name="password"
+          onChange={handleChange}
+          placeholder="*************"
+          required
+          maxLength="10"
+        />
+        {errors.password && <p className="error">{errors.password}</p>}
+        <button className="btn-envio">Submit</button>
     </form>
   );
 };

@@ -1,0 +1,36 @@
+.deatil {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    padding-top: 130px;
+  }
+  
+  .image-deatil {
+    border-radius: 50%;
+    width: 50vh;
+    margin-right: 70px;
+    box-shadow: 8px 10px 9px -4px rgba(255, 255, 255, 0.75);
+    -webkit-box-shadow: 8px 10px 9px -4px rgba(255, 255, 255, 0.75);
+    -moz-box-shadow: 8px 10px 9px -4px rgba(255, 255, 255, 0.75);
+  }
+  
+  .info-users {
+    border-left: medium solid #fff;
+    line-height: 2.5;
+    margin-right: 20px;
+  }
+  
+  .nombre-character {
+    margin-left: 40px;
+    font-size: 70px;
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+  }
+  
+  .datos-character {
+    margin-left: 70px;
+    font-size: 50px;
+  }
+  

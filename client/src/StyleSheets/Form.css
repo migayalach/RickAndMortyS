@@ -1,0 +1,64 @@
+.form-component {
+  margin-top: 110px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: medium solid white;
+  padding: 10px;
+  justify-content: center;
+  line-height: 2;
+  margin: auto 500px;
+  background-color: #edf2f4;
+  border-radius: 10px;
+  opacity: .9;
+}
+
+label {
+  font-weight: bold;
+  text-align: end;
+}
+
+.btn-envio {
+  color: #fefae0;
+  background-color: #8ac926;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn-envio:hover {
+  background-color: #ffc300;
+  color: #e63946;
+}
+
+.texto {
+  color: #283d3b;
+  text-align: left;
+}
+
+.logo {
+  width: 30vh;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+input {
+  padding: 15px;
+  font-size: 20px;
+}
+
+.error {
+  color: #e63946;
+  font-size: 15px;
+  font-weight: 700;
+}

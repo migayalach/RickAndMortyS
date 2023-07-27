@@ -19,6 +19,8 @@ function App() {
   const [access, setAccess] = useState(false);
   const email = "ayalachavezmiguel@gmail.com";
   const password = "10mike";
+  
+  // BUG AL ACTUALIZAR
   useEffect(() => {
     !access && navigate("/");
   }, [access]);
