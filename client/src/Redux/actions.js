@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_FAV, REMOVE_FAV, GET_CHARACTER } from "./action-types";
+import { ADD_FAV, REMOVE_FAV, RESET_FAV } from "./action-types";
 
 const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
 // BACK-END
@@ -17,4 +17,10 @@ export const removeFav = (id) => {
     type: REMOVE_FAV,
     payload: id,
   };
+};
+
+export const resetFav = () => {
+  return {
+    type: RESET_FAV,
+  }
 };

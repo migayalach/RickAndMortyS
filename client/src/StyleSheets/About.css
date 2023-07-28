@@ -1,0 +1,56 @@
+.principal-container {
+  padding: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.social-networks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 50px;
+}
+
+.icons {
+  font-size: 25px;
+  margin: auto 20px;
+}
+
+span > a {
+  text-decoration: none;
+  color: #fff;
+  transition: 0.5s;
+}
+
+span > a:hover {
+  color: #ced4da;
+}
+
+.icons {
+  transition: 0.5s;
+}
+
+.icons:hover {
+  border-bottom: 1px solid aliceblue;
+}
+
+.photo {
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.list-skils {
+  list-style: none;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.skils {
+  margin-top: 10px;
+}
+
+h1{
+  margin-top: 5px;
+  margin-bottom: 15px;
+}

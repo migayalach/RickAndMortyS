@@ -1,8 +1,7 @@
-import { ADD_FAV, REMOVE_FAV } from "./action-types";
+import { ADD_FAV, REMOVE_FAV, RESET_FAV } from "./action-types";
 
 const initialState = {
   myFavorites: [],
-  aux: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -18,6 +17,10 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         myFavorites: state.myFavorites.filter(({ id }) => id !== +payload),
       };
+
+    case REMOVE_FAV: 
+      return {
+      }
 
     default:
       return {

@@ -17,8 +17,8 @@ const Favorites = () => {
       <h1>Favoritos</h1>
       {recipe?.map(({ id, name, species, gender, image }) => {
         return (
-          <div className="card-container">
-            <button key={id} name={id} onClick={handleFavorite}> ❤️ </button>
+          <div className="card-container" key={id}>
+            <button name={id} onClick={handleFavorite}> ❤️ </button>
             <div>
               <Link to={`/detail/${id}`}>
                 <h2 className="nombre">{name}</h2>

@@ -4,7 +4,6 @@ import "../StyleSheets/SearchBar.css";
 const SearchBar = ({ onSearch }) => {
   const [id, setId] = useState("");
   const handleChange = (event) => {
-    // console.log(event.target.value);
     setId(event.target.value);
   };
 
@@ -15,7 +14,6 @@ const SearchBar = ({ onSearch }) => {
 
   const personajeAleatorio = () => {
     const id = Math.floor(Math.random() * (826 - 0 + 1) + 0);
-    //console.log(x);
     onSearch(id);
     setId("");
   };
@@ -28,15 +26,11 @@ const SearchBar = ({ onSearch }) => {
         onChange={handleChange}
         value={id}
       />
-      <button 
-        className="aceptar" 
-        onClick={calback}
-        >Agregar
+      <button className="aceptar" onClick={calback}>
+        Agregar
       </button>
-      <button 
-        className="aceptar" 
-        onClick={personajeAleatorio}
-        >Random
+      <button className="aceptar" onClick={personajeAleatorio}>
+        Random
       </button>
     </div>
   );

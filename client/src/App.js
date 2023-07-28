@@ -2,8 +2,8 @@ import axios from "axios";
 // HOOK'S
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {removeFav} from "./Redux/actions";
+import { useDispatch } from "react-redux";
+import { removeFav, resetFav } from "./Redux/actions";
 
 // CSS
 import "./StyleSheets/App.css";
@@ -23,13 +23,17 @@ function App() {
   const [access, setAccess] = useState(false);
   const email = "ayalachavezmiguel@gmail.com";
   const password = "10mike";
-  
+
+  const [characters, setCharacters] = useState([]);
+
   // BUG AL ACTUALIZAR
   useEffect(() => {
     !access && navigate("/");
+    setCharacters([]);
+    for (let i = 0; i < characters.length; i++) {
+      dispatch(removeFav(characters[i].id));
+    }
   }, [access]);
-
-  const [characters, setCharacters] = useState([]);
 
   function onSearch(id) {
     axios(`https://rickandmortyapi.com/api/character/${id}`).then(
@@ -88,7 +92,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path=":id" element={<Error />} />
-        <Route path="/favorites" element={<Favorites/>} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </div>
   );
