@@ -1,7 +1,11 @@
-import { ADD_FAV, REMOVE_FAV } from "./action-types";
+import axios from "axios";
+import { ADD_FAV, REMOVE_FAV, GET_CHARACTER } from "./action-types";
+
+const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
+// BACK-END
+// const URL_NAME= `https://rickandmortyapi.com/api/character/?name=Cool%20Rick`;
 
 export const addFav = (personaje) => {
-  console.log("llege");
   return {
     type: ADD_FAV,
     payload: personaje,

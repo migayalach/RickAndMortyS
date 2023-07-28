@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import "../StyleSheets/Card.css";
 
 const Card = ({ id, name, species, gender, image, onClose }) => {
+  const recipe = useSelector((state) => state.myFavorites);
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
+
   const handleFavorite = () => {
     if (isFav === true) {
       setIsFav(false);
@@ -26,7 +28,6 @@ const Card = ({ id, name, species, gender, image, onClose }) => {
     }
   };
 
-  const recipe = useSelector((state)=>state.myFavorites)
   useEffect(() => {
     recipe.forEach((fav) => {
       if (fav.id === id) {

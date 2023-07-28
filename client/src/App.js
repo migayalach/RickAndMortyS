@@ -2,6 +2,9 @@ import axios from "axios";
 // HOOK'S
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {removeFav} from "./Redux/actions";
+
 // CSS
 import "./StyleSheets/App.css";
 // COMPONENTS
@@ -16,6 +19,7 @@ import Favorites from "./Components/Favorites";
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [access, setAccess] = useState(false);
   const email = "ayalachavezmiguel@gmail.com";
   const password = "10mike";
@@ -58,6 +62,7 @@ function App() {
       (personajes) => personajes.id !== newId
     );
     setCharacters(newCharacters);
+    dispatch(removeFav(id));
   };
 
   const login = (userData) => {
