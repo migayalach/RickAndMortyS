@@ -1,15 +1,15 @@
 const SUCCESS = 200;
 const ERROR = 400;
-const getUsers = require("../Controllers/usersControllers");
+const getLogin = require("../Controllers/loginControllers");
 
-const userHandlers = async (request, response) => {
+const loginHandlers = async (request, response) => {
   const { email, password } = request.query;
   try {
-    const access = await getUsers(email, password);
+    const access = await getLogin(email, password);
     response.status(SUCCESS).json(access);
   } catch (error) {
     response.status(ERROR).json({ acces: false });
   }
 };
 
-module.exports = userHandlers;
+module.exports = loginHandlers;

@@ -1,6 +1,6 @@
 const user = require("../Utils/user");
 
-const getUsers = async (email, password) => {
+const getLogin = async (email, password) => {
   const response = await user.filter(
     (element) => element.email === email && element.password === password
   );
@@ -10,4 +10,4 @@ const getUsers = async (email, password) => {
   throw Error (":C");
 };
 
-module.exports = getUsers;
+module.exports = getLogin;
