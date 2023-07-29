@@ -1,5 +1,6 @@
 const SUCCESS = 200;
 const ERROR = 400;
+// const { getCharacter } = require("../Controllerss/charactersControllers");
 const { getCharacter } = require("../Controllers/charactersControllers");
 
 const getCharacterHandler = async (request, response) => {
