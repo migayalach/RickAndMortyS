@@ -1,9 +1,7 @@
 import axios from "axios";
-import { ADD_FAV, REMOVE_FAV, RESET_FAV } from "./action-types";
+import { ADD_FAV, REMOVE_FAV, FILTER_CARDS, ORDER_CARDS, ALL_CHARACTERS } from "./action-types";
 
-const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
-// BACK-END
-// const URL_NAME= `https://rickandmortyapi.com/api/character/?name=Cool%20Rick`;
+const URL = `https://rickandmortyapi.com/api/character`;
 
 export const addFav = (personaje) => {
   return {
@@ -19,8 +17,25 @@ export const removeFav = (id) => {
   };
 };
 
-export const resetFav = () => {
+export const filterCards = (gender) => {
   return {
-    type: RESET_FAV,
-  }
+    type: FILTER_CARDS,
+    payload: gender,
+  };
 };
+
+export const orderCards = (order) => {
+  return {
+    type: ORDER_CARDS,
+    payload: order,
+  };
+};
+
+export const allCharacters = () => {
+
+};
+
+
+// const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
+// BACK-END
+// const URL_NAME= `https://rickandmortyapi.com/api/character/?name=Cool%20Rick`;

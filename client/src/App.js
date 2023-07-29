@@ -33,6 +33,8 @@ function App() {
     for (let i = 0; i < characters.length; i++) {
       dispatch(removeFav(characters[i].id));
     }
+    // FIN DEL CICLO
+    // return "me voy"
   }, [access]);
 
   function onSearch(id) {
