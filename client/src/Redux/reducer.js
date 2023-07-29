@@ -1,4 +1,10 @@
-import { ADD_FAV, REMOVE_FAV, FILTER_CARDS, ORDER_CARDS } from "./action-types";
+import {
+  ADD_FAV,
+  REMOVE_FAV,
+  FILTER_CARDS,
+  ORDER_CARDS,
+  GET_CHARACTERS,
+} from "./action-types";
 
 const initialState = {
   myFavorites: [],
@@ -43,6 +49,12 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         myFavorites: order(allCharactersCopy, payload),
+      };
+
+    case GET_CHARACTERS:
+      return {
+        ...state,
+        myFavorites: payload,
       };
 
     default:

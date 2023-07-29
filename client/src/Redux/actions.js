@@ -1,5 +1,11 @@
 import axios from "axios";
-import { ADD_FAV, REMOVE_FAV, FILTER_CARDS, ORDER_CARDS, ALL_CHARACTERS } from "./action-types";
+import {
+  ADD_FAV,
+  REMOVE_FAV,
+  FILTER_CARDS,
+  ORDER_CARDS,
+  GET_CHARACTERS,
+} from "./action-types";
 
 const URL = `https://rickandmortyapi.com/api/character`;
 
@@ -31,10 +37,17 @@ export const orderCards = (order) => {
   };
 };
 
-export const allCharacters = () => {
-
+export const getCharacters = () => {
+  return async function (dispatch) {
+    const apiData = await axios.get(`${URL}`);
+    //SIN PAGINACION
+    const characters = apiData.data.results;
+    dispatch({
+      type: GET_CHARACTERS,
+      payload: characters,
+    });
+  };
 };
-
 
 // const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
 // BACK-END
