@@ -49,6 +49,10 @@ export const getCharacters = () => {
   };
 };
 
+
+
+
+
 // const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
 // BACK-END
 // const URL_NAME= `https://rickandmortyapi.com/api/character/?name=Cool%20Rick`;

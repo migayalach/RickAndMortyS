@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { filterCards, orderCards, removeFav, getCharacters } from "../Redux/actions";
+import {
+  filterCards,
+  orderCards,
+  removeFav,
+  getCharacters,
+} from "../Redux/actions";
 import "../StyleSheets/Card.css";
 
 const Favorites = () => {
   const [aux, setAux] = useState(false);
   const recipe = useSelector((state) => state.myFavorites);
-  console.log(recipe);
   const dispatch = useDispatch();
 
   const handleFavorite = (event) => {
@@ -23,7 +27,9 @@ const Favorites = () => {
 
   const handleFilter = (event) => {
     const option = event.target.value;
-    option === "All" ? dispatch(getCharacters()) : dispatch(filterCards(option));
+    option === "All"
+      ? dispatch(getCharacters())
+      : dispatch(filterCards(option));
   };
 
   return (

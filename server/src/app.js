@@ -3,8 +3,11 @@ const morgan = require("morgan");
 const cors = require("cors");
 const mainRouter = require("./Routes");
 const app = express();
+
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
+
 app.use(mainRouter);
+
 module.exports = app;

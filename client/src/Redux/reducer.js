@@ -9,6 +9,7 @@ import {
 const initialState = {
   myFavorites: [],
   allCharacters: [],
+  aux: []
 };
 
 const reducer = (state = initialState, { type, payload }) => {

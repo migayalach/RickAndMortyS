@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeFav, resetFav } from "./Redux/actions";
+import { removeFav } from "./Redux/actions";
 
 // CSS
 import "./StyleSheets/App.css";
@@ -38,17 +38,17 @@ function App() {
   }, [access]);
 
   function onSearch(id) {
-    axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-      ({ data }) => {
-        const respuesta = verificarPersonaje(data.id, characters);
-        if (respuesta === true)
-          window.alert("El personaje ya existe no se puede repetir :C");
-        else {
-          if (data.id) setCharacters((oldChars) => [...oldChars, data]);
-          else window.alert("¡No hay personajes con este ID!");
-        }
+    // axios(`https://rickandmortyapi.com/api/character/${id}`).then(
+    axios(`http://localhost:3001/characters/${id}`).then(({ data }) => {
+      
+      const respuesta = verificarPersonaje(data.id, characters);
+      if (respuesta === true)
+        window.alert("El personaje ya existe no se puede repetir :C");
+      else {
+        if (data.id) setCharacters((oldChars) => [...oldChars, data]);
+        else window.alert("¡No hay personajes con este ID!");
       }
-    );
+    });
   }
 
   const verificarPersonaje = (id, characters) => {
