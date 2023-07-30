@@ -9,40 +9,33 @@ import {
 
 const URL = `https://rickandmortyapi.com/api/character`;
 
-// export const addFav = (personaje) => {
-//   return {
-//     type: ADD_FAV,
-//     payload: personaje,
-//   };
-// };
-
 export const addFav = (character) => {
   const endpoint = "http://localhost:3001/rickandmorty/favorite";
-  return (dispatch) => {
-    axios.post(endpoint, character).then(({ data }) => {
-      return dispatch({
+  return async (dispatch) => {
+    try {
+      const responseRoute = (await axios.post(endpoint, character)).data;
+      dispatch({
         type: ADD_FAV,
-        payload: data,
+        payload: responseRoute,
       });
-    });
+    } catch (error) {
+      alert("Error al agregar a favoritos: " + error.message);
+    }
   };
 };
 
-// export const removeFav = (id) => {
-//   return {
-//     type: REMOVE_FAV,
-//     payload: id,
-//   };
-// };
 export const removeFav = (id) => {
   const endpoint = "http://localhost:3001/rickandmorty/favorite/" + id;
-  return (dispatch) => {
-    axios.delete(endpoint).then(({ data }) => {
+  return async (dispatch) => {
+    try {
+      const responseRoute = (await axios.delete(endpoint)).data;
       return dispatch({
         type: REMOVE_FAV,
-        payload: data,
+        payload: responseRoute,
       });
-    });
+    } catch (error) {
+      alert("Error al eliminar de favoritos: " + error.message);
+    }
   };
 };
 
@@ -72,6 +65,5 @@ export const getCharacters = () => {
   };
 };
 
-// const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
 // BACK-END
 // const URL_NAME= `https://rickandmortyapi.com/api/character/?name=Cool%20Rick`;

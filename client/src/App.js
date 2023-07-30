@@ -35,19 +35,23 @@ function App() {
     // return "me voy"
   }, [access]);
 
-  function onSearch(id) {
-    axios(`http://localhost:3001/rickandmorty/characters/${id}`).then(
-      ({ data }) => {
-        const respuesta = verificarPersonaje(data.id, characters);
-        if (respuesta === true)
-          window.alert("El personaje ya existe no se puede repetir :C");
-        else {
-          if (data.id) setCharacters((oldChars) => [...oldChars, data]);
-          else window.alert("¡No hay personajes con este ID!");
-        }
+  const onSearch = async (id) => {
+    try {
+      const responseApi = await axios(
+        `http://localhost:3001/rickandmorty/characters/${id}`
+      );
+      const dataClear = responseApi.data;
+      const respuesta = verificarPersonaje(dataClear.id, characters);
+      if (respuesta === true)
+        window.alert("El personaje ya existe no se puede repetir :C");
+      else {
+        if (dataClear.id) setCharacters((oldChars) => [...oldChars, dataClear]);
+        else window.alert("¡No hay personajes con este ID!");
       }
-    );
-  }
+    } catch (error) {
+      alert("¡No hay personajes con este ID!");
+    }
+  };
 
   const verificarPersonaje = (id, characters) => {
     let aux = false;
@@ -69,15 +73,23 @@ function App() {
     dispatch(removeFav(id));
   };
 
-  const login = (userData) => {
+  const login = async (userData) => {
     const { email, password } = userData;
     const URL = "http://localhost:3001/rickandmorty/login/";
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
-      const { access } = data;
-      setAccess(data);
-      access && navigate("/home");
-    });
-  }
+    try {
+      const { access } = (
+        await axios(URL + `?email=${email}&password=${password}`)
+      ).data;
+      if (access === true) {
+        setAccess(access);
+        access && navigate("/home");
+      } else {
+        alert("error");
+      }
+    } catch (error) {
+      alert("error");
+    }
+  };
 
   const logout = () => {
     setAccess(false);

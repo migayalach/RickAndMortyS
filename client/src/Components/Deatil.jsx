@@ -8,8 +8,8 @@ import { useParams } from "react-router-dom";
 const Detail = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState({});
+  
   useEffect(() => {
-    // axios(`https://rickandmortyapi.com/api/character/${id}`).then(
     axios(`http://localhost:3001/rickandmorty/characters/${id}`).then(({ data }) => {
       if (data.name) {
         setCharacter(data);
@@ -19,6 +19,7 @@ const Detail = () => {
     });
     return setCharacter({});
   }, [id]);
+
   return (
     <div>
       {character && (
