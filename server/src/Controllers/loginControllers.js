@@ -5,7 +5,7 @@ const getLogin = async (email, password) => {
     (element) => element.email === email && element.password === password
   );
   if (response.length === 1) {
-    return { acces: true };
+    return { access: true };
   }
   throw Error (":C");
 };

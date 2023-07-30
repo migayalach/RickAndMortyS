@@ -9,17 +9,40 @@ import {
 
 const URL = `https://rickandmortyapi.com/api/character`;
 
-export const addFav = (personaje) => {
-  return {
-    type: ADD_FAV,
-    payload: personaje,
+// export const addFav = (personaje) => {
+//   return {
+//     type: ADD_FAV,
+//     payload: personaje,
+//   };
+// };
+
+export const addFav = (character) => {
+  const endpoint = "http://localhost:3001/rickandmorty/favorite";
+  return (dispatch) => {
+    axios.post(endpoint, character).then(({ data }) => {
+      return dispatch({
+        type: ADD_FAV,
+        payload: data,
+      });
+    });
   };
 };
 
+// export const removeFav = (id) => {
+//   return {
+//     type: REMOVE_FAV,
+//     payload: id,
+//   };
+// };
 export const removeFav = (id) => {
-  return {
-    type: REMOVE_FAV,
-    payload: id,
+  const endpoint = "http://localhost:3001/rickandmorty/favorite/" + id;
+  return (dispatch) => {
+    axios.delete(endpoint).then(({ data }) => {
+      return dispatch({
+        type: REMOVE_FAV,
+        payload: data,
+      });
+    });
   };
 };
 
@@ -48,10 +71,6 @@ export const getCharacters = () => {
     });
   };
 };
-
-
-
-
 
 // const URL_CHARACTER = `https://rickandmortyapi.com/api/character/`;
 // BACK-END

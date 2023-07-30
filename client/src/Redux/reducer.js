@@ -9,23 +9,26 @@ import {
 const initialState = {
   myFavorites: [],
   allCharacters: [],
-  aux: []
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    // case ADD_FAV:
+    //   return {
+    //     ...state,
+    //     myFavorites: [...state.myFavorites, payload],
+    //     allCharacters: [...state.allCharacters, payload],
+    //   };
     case ADD_FAV:
-      return {
-        ...state,
-        myFavorites: [...state.myFavorites, payload],
-        allCharacters: [...state.allCharacters, payload],
-      };
+      return { ...state, myFavorites: payload, allCharacters: payload };
 
+    // case REMOVE_FAV:
+    //   return {
+    //     ...state,
+    //     myFavorites: state.myFavorites.filter(({ id }) => id !== +payload),
+    //   };
     case REMOVE_FAV:
-      return {
-        ...state,
-        myFavorites: state.myFavorites.filter(({ id }) => id !== +payload),
-      };
+      return { ...state, myFavorites: payload };
 
     case FILTER_CARDS:
       return {
@@ -34,16 +37,6 @@ const reducer = (state = initialState, { type, payload }) => {
           ({ gender }) => gender === payload
         ),
       };
-
-    // case ORDER_CARDS:
-    //   const allCharactersCopy = [...state.allCharacters];
-    //   return {
-    //     ...state,
-    //     myFavorites:
-    //       payload === "A"
-    //         ? allCharactersCopy.sort((a, b) => a.id < b.id)
-    //         : allCharactersCopy.sort((a, b) => a.id > b.id),
-    //   };
 
     case ORDER_CARDS:
       const allCharactersCopy = [...state.allCharacters];

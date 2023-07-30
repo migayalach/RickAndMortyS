@@ -16,7 +16,7 @@ const postFavHandlers = async (request, response) => {
       image,
       status,
     });
-    response.status(SUCCESS).json({ success: responseData, create: true });
+    response.status(SUCCESS).json(responseData);
   } catch (error) {
     response.status(ERROR).json({ error: error.message });
   }

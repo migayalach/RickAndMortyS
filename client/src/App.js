@@ -21,8 +21,6 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [access, setAccess] = useState(false);
-  const email = "ayalachavezmiguel@gmail.com";
-  const password = "10mike";
 
   const [characters, setCharacters] = useState([]);
 
@@ -38,17 +36,17 @@ function App() {
   }, [access]);
 
   function onSearch(id) {
-    // axios(`https://rickandmortyapi.com/api/character/${id}`).then(
-    axios(`http://localhost:3001/characters/${id}`).then(({ data }) => {
-      
-      const respuesta = verificarPersonaje(data.id, characters);
-      if (respuesta === true)
-        window.alert("El personaje ya existe no se puede repetir :C");
-      else {
-        if (data.id) setCharacters((oldChars) => [...oldChars, data]);
-        else window.alert("¡No hay personajes con este ID!");
+    axios(`http://localhost:3001/rickandmorty/characters/${id}`).then(
+      ({ data }) => {
+        const respuesta = verificarPersonaje(data.id, characters);
+        if (respuesta === true)
+          window.alert("El personaje ya existe no se puede repetir :C");
+        else {
+          if (data.id) setCharacters((oldChars) => [...oldChars, data]);
+          else window.alert("¡No hay personajes con este ID!");
+        }
       }
-    });
+    );
   }
 
   const verificarPersonaje = (id, characters) => {
@@ -72,11 +70,14 @@ function App() {
   };
 
   const login = (userData) => {
-    if (userData.password === password && userData.email === email) {
-      setAccess(true);
-      navigate("/home");
-    } else alert("escriba bien carambas");
-  };
+    const { email, password } = userData;
+    const URL = "http://localhost:3001/rickandmorty/login/";
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      const { access } = data;
+      setAccess(data);
+      access && navigate("/home");
+    });
+  }
 
   const logout = () => {
     setAccess(false);
