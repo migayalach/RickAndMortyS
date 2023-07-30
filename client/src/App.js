@@ -1,4 +1,5 @@
 import axios from "axios";
+
 // HOOK'S
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
@@ -7,20 +8,28 @@ import { removeFav } from "./Redux/actions";
 
 // CSS
 import "./StyleSheets/App.css";
-// COMPONENTS
-import Nav from "./Components/Nav";
-import Cards from "./Components/Cards";
-import About from "./Components/About";
-import Detail from "./Components/Deatil";
-import Error from "./Components/Error";
-import Form from "./Components/Form";
-import Favorites from "./Components/Favorites";
 
-function App() {
+// COMPONENTS
+import {
+  About,
+  Card,
+  Cards,
+  Detail,
+  Error,
+  Favorites,
+  Form,
+  Nav,
+  Pagination,
+  SearchBar,
+} from "./Components";
+
+const App = () => {
   const location = useLocation();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [access, setAccess] = useState(false);
+  const initialAccess = localStorage.getItem("access") === "true";
+  const [access, setAccess] = useState(initialAccess);
 
   const [characters, setCharacters] = useState([]);
 
@@ -31,8 +40,6 @@ function App() {
     for (let i = 0; i < characters.length; i++) {
       dispatch(removeFav(characters[i].id));
     }
-    // FIN DEL CICLO
-    // return "me voy"
   }, [access]);
 
   const onSearch = async (id) => {
@@ -81,7 +88,8 @@ function App() {
         await axios(URL + `?email=${email}&password=${password}`)
       ).data;
       if (access === true) {
-        setAccess(access);
+        localStorage.setItem("access", "true");
+        setAccess(true);
         access && navigate("/home");
       } else {
         alert("error");
@@ -92,6 +100,7 @@ function App() {
   };
 
   const logout = () => {
+    localStorage.removeItem("access");
     setAccess(false);
   };
 
@@ -111,6 +120,6 @@ function App() {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;
