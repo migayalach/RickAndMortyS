@@ -1,13 +1,17 @@
-const user = require("../Utils/user");
+const { User } = require("../DataBase/dataBase");
 
-const getLogin = async (email, password) => {
-  const response = await user.filter(
-    (element) => element.email === email && element.password === password
-  );
-  if (response.length === 1) {
-    return { access: true };
+const getLogin = async ({ email, password }) => {
+  if (!email || !password) {
+    throw Error(`Faltan datos`);
   }
-  throw Error (":C");
+
+  if (await User.findOne({ where: { email } })) {
+    if (await User.findOne({ where: { password } })) {
+      return { access: true };
+    }
+    throw Error(`La constraseña: ${password} es incorrecta`);
+  }
+  throw Error(`El email: ${email} no se lo pudo encontrar`);
 };
 
 module.exports = getLogin;

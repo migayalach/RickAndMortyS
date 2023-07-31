@@ -10,18 +10,13 @@ import { removeFav } from "./Redux/actions";
 import "./StyleSheets/App.css";
 
 // COMPONENTS
-import {
-  About,
-  Card,
-  Cards,
-  Detail,
-  Error,
-  Favorites,
-  Form,
-  Nav,
-  Pagination,
-  SearchBar,
-} from "./Components";
+import Nav from "./Components/Nav";
+import Cards from "./Components/Cards";
+import About from "./Components/About";
+import Detail from "./Components/Deatil";
+import Error from "./Components/Error";
+import Form from "./Components/Form";
+import Favorites from "./Components/Favorites";
 
 const App = () => {
   const location = useLocation();
