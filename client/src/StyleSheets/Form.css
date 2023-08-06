@@ -21,7 +21,7 @@ label {
   text-align: end;
 }
 
-.btn-envio {
+.btn-envio, .btn-registro {
   color: #fefae0;
   background-color: #8ac926;
   padding: 10px;

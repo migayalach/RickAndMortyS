@@ -3,6 +3,7 @@ import validation from "../Utils/validation";
 import "../StyleSheets/Form.css"
 
 const Form = ({ login }) => {
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -26,7 +27,7 @@ const Form = ({ login }) => {
   };
 
   return (
-    <form className="form-component" onSubmit={handleSubmit}>
+    <form className="form-component" >
         <img
           className="logo"
           src={require(`../image/Rick-And-Morty.png`)}
@@ -58,7 +59,7 @@ const Form = ({ login }) => {
           maxLength="10"
         />
         {errors.password && <p className="error">{errors.password}</p>}
-        <button className="btn-envio">Submit</button>
+        <button className="btn-envio" onClick={handleSubmit}>Submit</button>
     </form>
   );
 };

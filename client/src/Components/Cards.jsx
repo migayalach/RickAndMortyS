@@ -10,6 +10,8 @@ export default function Cards({ characters, onClose }) {
             key={personaje.id}
             id={personaje.id}
             name={personaje.name}
+            origin={personaje.origin}
+            status={personaje.status}
             species={personaje.species}
             gender={personaje.gender}
             image={personaje.image}

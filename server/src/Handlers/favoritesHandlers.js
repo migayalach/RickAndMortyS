@@ -1,20 +1,20 @@
 const SUCCESS = 200;
-const ERROR = 400;
+const ERROR = 500;
 const {
   postFavorites,
   deleteFav,
 } = require("../Controllers/favoritesControllers");
 
 const postFavHandlers = async (request, response) => {
-  const { id, name, gender, origin, image, status } = request.body;
+  const { name, origin, status, image, species, gender } = request.body;
   try {
     const responseData = await postFavorites({
-      id,
       name,
-      gender,
       origin,
-      image,
       status,
+      image,
+      species,
+      gender,
     });
     response.status(SUCCESS).json(responseData);
   } catch (error) {
@@ -25,7 +25,7 @@ const postFavHandlers = async (request, response) => {
 const deleteFavHandlers = async (request, response) => {
   const { id } = request.params;
   try {
-    const actionResponse = await deleteFav(+id);
+    const actionResponse = await deleteFav(id);
     response.status(SUCCESS).json(actionResponse);
   } catch (error) {
     response.status(ERROR).json({ error: error.message });

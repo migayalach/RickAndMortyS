@@ -18,6 +18,8 @@ import Error from "./Components/Error";
 import Form from "./Components/Form";
 import Favorites from "./Components/Favorites";
 
+import { CheckIn } from "./Views";
+
 const App = () => {
   const location = useLocation();
 
@@ -101,6 +103,7 @@ const App = () => {
 
   return (
     <div className="App">
+      {/* <CheckIn /> */}
       {location.pathname !== "/" && <Nav onSearch={onSearch} logout={logout} />}
       <Routes>
         <Route

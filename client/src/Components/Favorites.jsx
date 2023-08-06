@@ -51,7 +51,7 @@ const Favorites = () => {
         <option value="unknown">Unknown</option>
       </select>
 
-      {recipe?.map(({ id, name, species, gender, image }) => {
+      {recipe?.map(({ id, name, origin, status, species, gender, image }) => {
         return (
           <div className="card-container" key={id}>
             <button name={id} onClick={handleFavorite}>

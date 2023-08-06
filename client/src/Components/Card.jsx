@@ -4,7 +4,16 @@ import { addFav, removeFav } from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import "../StyleSheets/Card.css";
 
-const Card = ({ id, name, species, gender, image, onClose }) => {
+const Card = ({
+  id,
+  name,
+  origin,
+  status,
+  species,
+  gender,
+  image,
+  onClose,
+}) => {
   const recipe = useSelector((state) => state.myFavorites);
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
@@ -19,6 +28,8 @@ const Card = ({ id, name, species, gender, image, onClose }) => {
         addFav({
           id,
           name,
+          origin,
+          status,
           species,
           gender,
           image,
@@ -28,6 +39,7 @@ const Card = ({ id, name, species, gender, image, onClose }) => {
     }
   };
 
+  console.log(recipe);
   useEffect(() => {
     recipe.forEach((fav) => {
       if (fav.id === id) {
@@ -56,6 +68,8 @@ const Card = ({ id, name, species, gender, image, onClose }) => {
       <div className="pie-de-pagina">
         <h2 className="datos">{species}</h2>
         <h2 className="datos">{gender}</h2>
+        {/* <p className="datos">{}</p> */}
+        {/* <p className="datos">{}</p> */}
       </div>
     </div>
   );

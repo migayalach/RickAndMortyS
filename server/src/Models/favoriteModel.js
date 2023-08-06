@@ -4,9 +4,10 @@ module.exports = (sequelize) => {
     "Favorite",
     {
       id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+        // defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
@@ -25,7 +26,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       origin: {
-        type: DataTypes.STRING,
+        type: DataTypes.JSON,
         allowNull: false,
       },
       image: {

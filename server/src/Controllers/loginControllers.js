@@ -1,6 +1,6 @@
 const { User } = require("../DataBase/dataBase");
 
-const getLogin = async ({ email, password }) => {
+const getLogin = async ({ email, password }) => {  
   if (!email || !password) {
     throw Error(`Faltan datos`);
   }
