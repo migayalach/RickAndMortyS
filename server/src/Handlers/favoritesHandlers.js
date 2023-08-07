@@ -3,6 +3,7 @@ const ERROR = 500;
 const {
   postFavorites,
   deleteFav,
+  getFavorites,
 } = require("../Controllers/favoritesControllers");
 
 const postFavHandlers = async (request, response) => {
@@ -32,4 +33,12 @@ const deleteFavHandlers = async (request, response) => {
   }
 };
 
-module.exports = { postFavHandlers, deleteFavHandlers };
+const allFavorites = async (request, response) => {
+  try {
+    const favorites = await getFavorites();
+    response.status(SUCCESS).json(favorites);
+  } catch (error) {
+    response.status(ERROR).json({ error: error.message });
+  }
+};
+module.exports = { postFavHandlers, deleteFavHandlers, allFavorites };

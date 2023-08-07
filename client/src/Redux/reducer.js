@@ -4,6 +4,7 @@ import {
   FILTER_CARDS,
   ORDER_CARDS,
   GET_CHARACTERS,
+  GET_ALL_FAVORITES,
 } from "./action-types";
 
 const initialState = {
@@ -13,6 +14,12 @@ const initialState = {
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case GET_ALL_FAVORITES: {
+      return {
+        ...state,
+        myFavorites: payload,
+      };
+    }
     // case ADD_FAV:
     //   return {
     //     ...state,

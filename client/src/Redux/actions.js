@@ -5,6 +5,7 @@ import {
   FILTER_CARDS,
   ORDER_CARDS,
   GET_CHARACTERS,
+  GET_ALL_FAVORITES,
 } from "./action-types";
 
 const URL = `https://rickandmortyapi.com/api/character`;
@@ -35,6 +36,21 @@ export const removeFav = (id) => {
       });
     } catch (error) {
       alert("Error al eliminar de favoritos: " + error.message);
+    }
+  };
+};
+
+export const allFavorites = () => {
+  const enpoint = "http://localhost:3001/rickandmorty/favorite";
+  return async (dispatch) => {
+    try {
+      const responseGet = (await axios.get(enpoint)).data;
+      return dispatch({
+        type: GET_ALL_FAVORITES,
+        payload: responseGet,
+      });
+    } catch (error) {
+      return { error: error.message };
     }
   };
 };

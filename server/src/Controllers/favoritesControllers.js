@@ -1,6 +1,11 @@
 const { User, Favorite } = require("../DataBase/dataBase");
 
 //no debe haber repetidos
+const getFavorites = async () => {
+  const favorites = await Favorite.findAll();
+  return favorites;
+};
+
 const postFavorites = async ({
   name,
   origin,
@@ -22,7 +27,7 @@ const postFavorites = async ({
     gender,
   });
   await createFavorite.addUser(idUser);
-  return [createFavorite];
+  return createFavorite;
 };
 
 //si no existe el elemento aca devolver error
@@ -35,4 +40,4 @@ const deleteFav = async (id) => {
   return `Se elimino correctamente el personaje`;
 };
 
-module.exports = { postFavorites, deleteFav };
+module.exports = { postFavorites, deleteFav, getFavorites };

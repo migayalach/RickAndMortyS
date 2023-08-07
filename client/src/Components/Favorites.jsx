@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,6 +6,7 @@ import {
   orderCards,
   removeFav,
   getCharacters,
+  allFavorites,
 } from "../Redux/actions";
 import "../StyleSheets/Card.css";
 
@@ -31,6 +32,10 @@ const Favorites = () => {
       ? dispatch(getCharacters())
       : dispatch(filterCards(option));
   };
+
+  useEffect(() => {
+    dispatch(allFavorites());
+  }, []);
 
   return (
     <div>
