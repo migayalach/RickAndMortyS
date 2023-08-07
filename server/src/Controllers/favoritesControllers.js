@@ -7,6 +7,7 @@ const getFavorites = async () => {
 };
 
 const postFavorites = async ({
+  id,
   name,
   origin,
   status,
@@ -14,11 +15,13 @@ const postFavorites = async ({
   species,
   gender,
 }) => {
+  console.log(id);
   const user = await User.findOne({
     attribute: ["idUser"],
   });
   const idUser = user.dataValues.id;
   const createFavorite = await Favorite.create({
+    idPerson: id,
     name,
     origin,
     status,
@@ -32,6 +35,14 @@ const postFavorites = async ({
 
 //si no existe el elemento aca devolver error
 const deleteFav = async (id) => {
+  if(id){
+    const dataFavorite = await Favorite.findByPk(id, {
+      attributes: ["idPerson"],
+    });
+    const idPerson = dataFavorite.dataValues.idPerson;
+
+  }
+
   const deleteFavorite = await Favorite.findByPk(id);
   if (!deleteFavorite) {
     throw Error(`No se encontro el personaje`);

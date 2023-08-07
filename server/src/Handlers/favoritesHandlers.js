@@ -7,9 +7,10 @@ const {
 } = require("../Controllers/favoritesControllers");
 
 const postFavHandlers = async (request, response) => {
-  const { name, origin, status, image, species, gender } = request.body;
+  const { id, name, origin, status, image, species, gender } = request.body;
   try {
     const responseData = await postFavorites({
+      id,
       name,
       origin,
       status,
