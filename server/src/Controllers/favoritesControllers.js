@@ -27,7 +27,7 @@ const postFavorites = async ({
     gender,
   });
   await createFavorite.addUser(idUser);
-  return createFavorite;
+  return [createFavorite];
 };
 
 //si no existe el elemento aca devolver error

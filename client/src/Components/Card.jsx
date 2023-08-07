@@ -15,6 +15,7 @@ const Card = ({
   onClose,
 }) => {
   const recipe = useSelector((state) => state.myFavorites);
+  console.log(recipe);
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
 
