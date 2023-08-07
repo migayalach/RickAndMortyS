@@ -56,26 +56,28 @@ const Favorites = () => {
         <option value="unknown">Unknown</option>
       </select>
 
-      {recipe?.map(({ id, name, origin, status, species, gender, image }) => {
-        return (
-          <div className="card-container" key={id}>
-            <button name={id} onClick={handleFavorite}>
-              {" "}
-              ❤️{" "}
-            </button>
-            <div>
-              <Link to={`/detail/${id}`}>
-                <h2 className="nombre">{name}</h2>
-              </Link>
-              <img className="imagen" src={image} alt={name} />
-              <div className="pie-de-pagina">
-                <h2 className="datos">{species}</h2>
-                <h2 className="datos">{gender}</h2>
+      {recipe?.map(
+        ({ id, idPerson, name, origin, status, species, gender, image }) => {
+          return (
+            <div className="card-container" key={id}>
+              <button name={id} onClick={handleFavorite}>
+                {" "}
+                ❤️{" "}
+              </button>
+              <div>
+                <Link to={`/detail/${id}`}>
+                  <h2 className="nombre">{name}</h2>
+                </Link>
+                <img className="imagen" src={image} alt={name} />
+                <div className="pie-de-pagina">
+                  <h2 className="datos">{species}</h2>
+                  <h2 className="datos">{gender}</h2>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        }
+      )}
     </div>
   );
 };

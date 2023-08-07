@@ -10,6 +10,7 @@ import {
 const initialState = {
   myFavorites: [],
   allCharacters: [],
+  aux: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -18,6 +19,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         myFavorites: payload,
+        aux: state.myFavorites
       };
 
     case GET_ALL_FAVORITES:

@@ -18,10 +18,15 @@ const Card = ({
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
 
+  const getIdPersonBDD = (idSearch) => {
+    const aux = recipe.filter(({ idPerson }) => idPerson === idSearch);
+    return aux[0].id;
+  };
+
   const handleFavorite = () => {
     if (isFav === true) {
       setIsFav(false);
-      dispatch(removeFav(id));
+      dispatch(removeFav(getIdPersonBDD(id)));
     } else {
       setIsFav(true);
       dispatch(
@@ -55,7 +60,12 @@ const Card = ({
         <button onClick={handleFavorite}>🤍</button>
       )}
       <div className="boton">
-        <button className="cerrar" onClick={() => onClose(id)}>
+        <button
+          className="cerrar"
+          onClick={() =>
+            !isFav ? onClose(id, "noBdd") : onClose(getIdPersonBDD(id), "bdd", id)
+          }
+        >
           {" "}
           X{" "}
         </button>
@@ -67,8 +77,6 @@ const Card = ({
       <div className="pie-de-pagina">
         <h2 className="datos">{species}</h2>
         <h2 className="datos">{gender}</h2>
-        {/* <p className="datos">{}</p> */}
-        {/* <p className="datos">{}</p> */}
       </div>
     </div>
   );

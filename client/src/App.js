@@ -34,9 +34,6 @@ const App = () => {
   useEffect(() => {
     !access && navigate("/");
     setCharacters([]);
-    for (let i = 0; i < characters.length; i++) {
-      dispatch(removeFav(characters[i].id));
-    }
   }, [access]);
 
   const onSearch = async (id) => {
@@ -68,13 +65,24 @@ const App = () => {
     return aux;
   };
 
-  const onClose = (id) => {
+  const deletePerson = (id) => {
     let newId = parseInt(id);
     const newCharacters = characters.filter(
       (personajes) => personajes.id !== newId
     );
     setCharacters(newCharacters);
-    dispatch(removeFav(id));
+  };
+
+  const onClose = (id, str, idFav) => {
+    str === "bdd"
+      ? dispatch(removeFav(id)) && deletePerson(idFav)
+      : deletePerson(id);
+    // if (str === "bdd") {
+    //   dispatch(removeFav(id));
+    //   deletePerson(idFav);
+    // } else {
+    //   deletePerson(id);
+    // }
   };
 
   const login = async (userData) => {
