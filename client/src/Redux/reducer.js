@@ -14,26 +14,21 @@ const initialState = {
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case GET_ALL_FAVORITES: {
+    case GET_CHARACTERS:
       return {
         ...state,
         myFavorites: payload,
       };
-    }
-    // case ADD_FAV:
-    //   return {
-    //     ...state,
-    //     myFavorites: [...state.myFavorites, payload],
-    //     allCharacters: [...state.allCharacters, payload],
-    //   };
+
+    case GET_ALL_FAVORITES:
+      return {
+        ...state,
+        myFavorites: payload,
+      };
+
     case ADD_FAV:
       return { ...state, myFavorites: payload, allCharacters: payload };
 
-    // case REMOVE_FAV:
-    //   return {
-    //     ...state,
-    //     myFavorites: state.myFavorites.filter(({ id }) => id !== +payload),
-    //   };
     case REMOVE_FAV:
       return { ...state, myFavorites: payload };
 
@@ -50,12 +45,6 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         myFavorites: order(allCharactersCopy, payload),
-      };
-
-    case GET_CHARACTERS:
-      return {
-        ...state,
-        myFavorites: payload,
       };
 
     default:
@@ -75,3 +64,16 @@ const order = (arr, str) => {
     return arr.sort().reverse();
   }
 };
+
+// case ADD_FAV:
+//   return {
+//     ...state,
+//     myFavorites: [...state.myFavorites, payload],
+//     allCharacters: [...state.allCharacters, payload],
+//   };
+
+// case REMOVE_FAV:
+//   return {
+//     ...state,
+//     myFavorites: state.myFavorites.filter(({ id }) => id !== +payload),
+//   };

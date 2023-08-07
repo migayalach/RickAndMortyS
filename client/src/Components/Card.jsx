@@ -41,7 +41,7 @@ const Card = ({
 
   useEffect(() => {
     recipe.forEach((fav) => {
-      if (fav.id === id) {
+      if (fav.name === name) {
         setIsFav(true);
       }
     });
