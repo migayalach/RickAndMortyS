@@ -37,7 +37,7 @@ const deleteFav = async (id) => {
     throw Error(`No se encontro el personaje`);
   }
   await deleteFavorite.destroy();
-  return `Se elimino correctamente el personaje`;
+  return await getFavorites();
 };
 
 module.exports = { postFavorites, deleteFav, getFavorites };
