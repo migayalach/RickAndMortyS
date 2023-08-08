@@ -4,7 +4,7 @@ const getLogin = async ({ email, password }) => {
   if (!email || !password) {
     throw Error(`Faltan datos`);
   }
-
+  
   if (await User.findOne({ where: { email } })) {
     if (await User.findOne({ where: { password } })) {
       return { access: true };
