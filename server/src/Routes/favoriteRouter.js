@@ -2,12 +2,12 @@ const { Router } = require("express");
 const {
   postFavHandlers,
   deleteFavHandlers,
-  allFavorites
+  allFavorites,
 } = require("../Handlers/favoritesHandlers");
 const favoriteRouter = Router();
 
 favoriteRouter.post("/", postFavHandlers);
 favoriteRouter.delete("/:id", deleteFavHandlers);
-favoriteRouter.get("/", allFavorites);
+favoriteRouter.get("/:id", allFavorites);
 
 module.exports = favoriteRouter;
