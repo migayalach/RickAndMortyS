@@ -5,12 +5,14 @@ import {
   ORDER_CARDS,
   GET_CHARACTERS,
   GET_ALL_FAVORITES,
+  ID_USER,
 } from "./action-types";
 
 const initialState = {
   myFavorites: [],
   allCharacters: [],
   aux: [],
+  infoUser : {}
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -19,7 +21,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         myFavorites: payload,
-        aux: state.myFavorites
+        aux: state.myFavorites,
       };
 
     case GET_ALL_FAVORITES:
@@ -48,6 +50,12 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         myFavorites: order(allCharactersCopy, payload),
       };
+    
+    case ID_USER:
+      return {
+        ...state,
+        infoUser: payload
+    };
 
     default:
       return {
@@ -66,16 +74,3 @@ const order = (arr, str) => {
     return arr.sort().reverse();
   }
 };
-
-// case ADD_FAV:
-//   return {
-//     ...state,
-//     myFavorites: [...state.myFavorites, payload],
-//     allCharacters: [...state.allCharacters, payload],
-//   };
-
-// case REMOVE_FAV:
-//   return {
-//     ...state,
-//     myFavorites: state.myFavorites.filter(({ id }) => id !== +payload),
-//   };

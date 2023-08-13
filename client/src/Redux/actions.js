@@ -6,6 +6,7 @@ import {
   ORDER_CARDS,
   GET_CHARACTERS,
   GET_ALL_FAVORITES,
+  ID_USER,
 } from "./action-types";
 
 const URL = `https://rickandmortyapi.com/api/character`;
@@ -77,6 +78,17 @@ export const getCharacters = () => {
     dispatch({
       type: GET_CHARACTERS,
       payload: characters,
+    });
+  };
+};
+
+export const getIdUser = (emailUser) => {
+  return async function (dispatch) {
+    const URL_DATA = `http://localhost:3001/rickandmorty/user`;
+    const infoUser = (await axios.get(`${URL_DATA}?email=${emailUser}`)).data;
+    dispatch({
+      type: ID_USER,
+      payload: infoUser,
     });
   };
 };
