@@ -3,8 +3,8 @@ import axios from "axios";
 // HOOK'S
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { removeFav } from "./Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFav, getIdUser } from "./Redux/actions";
 
 // CSS
 import "./StyleSheets/App.css";
@@ -29,13 +29,14 @@ const App = () => {
   const [access, setAccess] = useState(initialAccess);
 
   const [characters, setCharacters] = useState([]);
+  const aux = useSelector((state)=>state.infoUser)
+  console.log(aux);
 
-  // BUG AL ACTUALIZAR
   useEffect(() => {
     !access && navigate("/");
     setCharacters([]);
   }, [access]);
-
+  
   const onSearch = async (id) => {
     try {
       const responseApi = await axios(
@@ -77,17 +78,11 @@ const App = () => {
     str === "bdd"
       ? dispatch(removeFav(id)) && deletePerson(idFav)
       : deletePerson(id);
-    // if (str === "bdd") {
-    //   dispatch(removeFav(id));
-    //   deletePerson(idFav);
-    // } else {
-    //   deletePerson(id);
-    // }
   };
 
   const login = async (userData) => {
     const { email, password } = userData;
-    const URL = "http://localhost:3001/rickandmorty/login/";
+    const URL = "http://localhost:3001/rickandmorty/user/";
     try {
       const { access } = (
         await axios(URL + `?email=${email}&password=${password}`)
@@ -95,6 +90,7 @@ const App = () => {
       if (access === true) {
         localStorage.setItem("access", "true");
         setAccess(true);
+        dispatch(getIdUser(email));
         access && navigate("/home");
       } else {
         alert("error");
