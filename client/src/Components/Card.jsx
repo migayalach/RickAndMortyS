@@ -17,6 +17,7 @@ const Card = ({
   const recipe = useSelector((state) => state.myFavorites);
   const idUserEnv = useSelector(({ infoUser }) => infoUser);
   const idUser = idUserEnv.infoUser;
+  
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
 
@@ -24,11 +25,11 @@ const Card = ({
     const aux = recipe.filter(({ idPerson }) => idPerson === idSearch);
     return aux[0].id;
   };
-
   const handleFavorite = () => {
     if (isFav === true) {
       setIsFav(false);
-      dispatch(removeFav(getIdPersonBDD(id)));
+      const idPerson = getIdPersonBDD(id);
+      dispatch(removeFav(idPerson));
     } else {
       setIsFav(true);
       dispatch(

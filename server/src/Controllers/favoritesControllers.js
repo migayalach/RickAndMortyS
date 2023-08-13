@@ -75,18 +75,33 @@ const postFavorites = async ({
 
 //si no existe el elemento aca devolver error
 const deleteFav = async (id) => {
-  if (id) {
-    const dataFavorite = await Favorite.findByPk(id, {
-      attributes: ["idPerson"],
+  console.log(id);
+  const deleteFavorite = await Favorite.findByPk(id, {
+    attributes: ["idPerson"],
+    include: [
+      {
+        model: User,
+        attributes: ["id"],
+      },
+    ],
+  });
+  if (deleteFavorite) {
+    const idUser = deleteFavorite.dataValues.Users[0].dataValues.id;
+    await UserFavorite.destroy({
+      where: {
+        FavoriteId: id,
+      },
     });
-    const idPerson = dataFavorite.dataValues.idPerson;
+    
+    await Favorite.destroy({
+      where: {
+        id,
+      },
+    });
+
+    return await getFavorites(idUser);
   }
-  const deleteFavorite = await Favorite.findByPk(id);
-  if (!deleteFavorite) {
-    throw Error(`No se encontro el personaje`);
-  }
-  await deleteFavorite.destroy();
-  return await getFavorites();
+  throw Error`El personaje: ${id}, no se encuentra registrado`;
 };
 
 module.exports = { postFavorites, deleteFav, getFavorites };

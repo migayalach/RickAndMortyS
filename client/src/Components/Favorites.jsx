@@ -61,7 +61,6 @@ const Favorites = () => {
       {recipe?.map(
         ({ id, idPerson, name, origin, status, species, gender, image }) => {
           return (
-            <div className="container">
               <div className="card-container" key={id}>
                 <button name={id} onClick={handleFavorite}>
                   {" "}
@@ -78,7 +77,6 @@ const Favorites = () => {
                   </div>
                 </div>
               </div>
-            </div>
           );
         }
       )}
