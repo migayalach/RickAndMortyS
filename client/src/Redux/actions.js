@@ -41,8 +41,8 @@ export const removeFav = (id) => {
   };
 };
 
-export const allFavorites = () => {
-  const enpoint = "http://localhost:3001/rickandmorty/favorite";
+export const allFavorites = (idUser) => {
+  const enpoint = `http://localhost:3001/rickandmorty/favorite/${idUser}`;
   return async (dispatch) => {
     try {
       const responseGet = (await axios.get(enpoint)).data;

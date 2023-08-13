@@ -13,6 +13,8 @@ import "../StyleSheets/Card.css";
 const Favorites = () => {
   const [aux, setAux] = useState(false);
   const recipe = useSelector((state) => state.myFavorites);
+  const idUserEnv = useSelector(({ infoUser }) => infoUser);
+  const idUser = idUserEnv.infoUser;
   const dispatch = useDispatch();
 
   const handleFavorite = (event) => {
@@ -34,7 +36,7 @@ const Favorites = () => {
   };
 
   useEffect(() => {
-    dispatch(allFavorites());
+    dispatch(allFavorites(idUser));
   }, []);
 
   return (

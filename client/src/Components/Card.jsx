@@ -15,6 +15,8 @@ const Card = ({
   onClose,
 }) => {
   const recipe = useSelector((state) => state.myFavorites);
+  const idUserEnv = useSelector(({ infoUser }) => infoUser);
+  const idUser = idUserEnv.infoUser;
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
 
@@ -39,6 +41,7 @@ const Card = ({
           gender,
           image,
           onClose,
+          idUser,
         })
       );
     }
@@ -63,7 +66,9 @@ const Card = ({
         <button
           className="cerrar"
           onClick={() =>
-            !isFav ? onClose(id, "noBdd") : onClose(getIdPersonBDD(id), "bdd", id)
+            !isFav
+              ? onClose(id, "noBdd")
+              : onClose(getIdPersonBDD(id), "bdd", id)
           }
         >
           {" "}

@@ -29,8 +29,6 @@ const App = () => {
   const [access, setAccess] = useState(initialAccess);
 
   const [characters, setCharacters] = useState([]);
-  const aux = useSelector((state)=>state.infoUser)
-  console.log(aux);
 
   useEffect(() => {
     !access && navigate("/");
