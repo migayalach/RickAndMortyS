@@ -21,7 +21,7 @@ label {
   text-align: end;
 }
 
-.btn-envio, .btn-registro {
+.btn-envio {
   color: #fefae0;
   background-color: #8ac926;
   padding: 10px;
@@ -39,6 +39,31 @@ label {
 .btn-envio:hover {
   background-color: #ffc300;
   color: #e63946;
+}
+
+.btn-registro {
+  color: #fefae0;
+  background-color: #ef233c;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn-registro:hover {
+  background-color: #ffc300;
+  color: #e63946;
+}
+
+.text-option {
+  color: #390099;
+  cursor: pointer;
 }
 
 .texto {
