@@ -18,8 +18,6 @@ import Error from "./Components/Error";
 import Form from "./Components/Form";
 import Favorites from "./Components/Favorites";
 
-import { CheckIn } from "./Views";
-
 const App = () => {
   const location = useLocation();
 
@@ -34,7 +32,7 @@ const App = () => {
     !access && navigate("/");
     setCharacters([]);
   }, [access]);
-  
+
   const onSearch = async (id) => {
     try {
       const responseApi = await axios(
@@ -80,6 +78,7 @@ const App = () => {
 
   const login = async (userData) => {
     const { email, password } = userData;
+    // console.log(email, password);
     const URL = "http://localhost:3001/rickandmorty/user/";
     try {
       const { access } = (
@@ -105,7 +104,6 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* <CheckIn /> */}
       {location.pathname !== "/" && <Nav onSearch={onSearch} logout={logout} />}
       <Routes>
         <Route
