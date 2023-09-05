@@ -3,7 +3,7 @@ import { useState } from "react";
 import validation from "../Utils/validation";
 import "../StyleSheets/Form.css";
 
-const Form = ({ login }) => {
+const Form = ({ login, signUp }) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -33,7 +33,7 @@ const Form = ({ login }) => {
       event.preventDefault();
       login(userData);
     } else {
-      alert("registro");
+      signUp(userData);
       event.preventDefault();
     }
   };
