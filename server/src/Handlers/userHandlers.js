@@ -1,6 +1,10 @@
 const SUCCESS = 200;
 const ERROR = 500;
-const { postUser, getLogin, searchInfo } = require("../Controllers/userControllers");
+const {
+  postUser,
+  getLogin,
+  searchInfo,
+} = require("../Controllers/userControllers");
 
 const userHandlers = async (request, response) => {
   //agragar middleware para ver si se recive email y password
