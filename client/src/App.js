@@ -78,7 +78,6 @@ const App = () => {
 
   const login = async (userData) => {
     const { email, password } = userData;
-    // console.log(email, password);
     const URL = "http://localhost:3001/rickandmorty/user/";
     try {
       const { access } = (
@@ -89,6 +88,26 @@ const App = () => {
         setAccess(true);
         dispatch(getIdUser(email));
         access && navigate("/home");
+      } else {
+        alert("error");
+      }
+    } catch (error) {
+      alert("error");
+    }
+  };
+
+  const signUp = async (userData) => {
+    const URL = `http://localhost:3001/rickandmorty/user`;
+    const { email } = userData;
+    try {
+      const { create } = (await axios.post(URL, userData)).data;
+      if (create === true) {
+        //HACER TEST
+        localStorage.setItem("create", "true");
+        setAccess(true);
+        dispatch(getIdUser(email));
+        create && navigate("/home");
+        //HASTA AQUI
       } else {
         alert("error");
       }
@@ -110,7 +129,7 @@ const App = () => {
           path="/home"
           element={<Cards characters={characters} onClose={onClose} />}
         />
-        <Route path="/" element={<Form login={login} />} />
+        <Route path="/" element={<Form login={login} signUp={signUp} />} />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path=":id" element={<Error />} />
