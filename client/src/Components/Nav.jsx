@@ -2,7 +2,7 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const Nav = ({ onSearch, logout }) => {
+const Nav = ({ onSearch, logout, email }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -13,6 +13,11 @@ const Nav = ({ onSearch, logout }) => {
   return (
     <div>
       <SearchBar onSearch={onSearch} />
+      <div>
+        <p>
+          Bienvenid@: <span>{email}</span>
+        </p>
+      </div>
       <button>
         <NavLink to="/about">About</NavLink>
       </button>
