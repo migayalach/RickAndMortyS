@@ -27,6 +27,7 @@ const App = () => {
   const [access, setAccess] = useState(initialAccess);
 
   const [characters, setCharacters] = useState([]);
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     !access && navigate("/");
@@ -84,6 +85,7 @@ const App = () => {
         await axios(URL + `?email=${email}&password=${password}`)
       ).data;
       if (access === true) {
+        setEmail(email);
         localStorage.setItem("access", "true");
         setAccess(true);
         dispatch(getIdUser(email));
@@ -104,6 +106,7 @@ const App = () => {
       if (create === true) {
         //HACER TEST
         localStorage.setItem("create", "true");
+        setEmail(email);
         setAccess(true);
         dispatch(getIdUser(email));
         create && navigate("/home");
@@ -123,7 +126,9 @@ const App = () => {
 
   return (
     <div className="App">
-      {location.pathname !== "/" && <Nav onSearch={onSearch} logout={logout} />}
+      {location.pathname !== "/" && (
+        <Nav onSearch={onSearch} logout={logout} email={email} />
+      )}
       <Routes>
         <Route
           path="/home"
