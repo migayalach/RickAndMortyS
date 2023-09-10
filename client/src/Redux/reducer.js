@@ -6,13 +6,14 @@ import {
   GET_CHARACTERS,
   GET_ALL_FAVORITES,
   ID_USER,
+  GET_NAME_CHARACTER,
 } from "./action-types";
 
 const initialState = {
   myFavorites: [],
   allCharacters: [],
   aux: [],
-  infoUser : {}
+  infoUser: {},
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -50,12 +51,15 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         myFavorites: order(allCharactersCopy, payload),
       };
-    
+
+    case GET_NAME_CHARACTER:
+      return console.log("holi");
+
     case ID_USER:
       return {
         ...state,
-        infoUser: payload
-    };
+        infoUser: payload,
+      };
 
     default:
       return {

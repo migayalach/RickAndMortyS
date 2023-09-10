@@ -7,6 +7,7 @@ import {
   GET_CHARACTERS,
   GET_ALL_FAVORITES,
   ID_USER,
+  GET_NAME_CHARACTER,
 } from "./action-types";
 
 const URL = `https://rickandmortyapi.com/api/character`;
@@ -93,5 +94,14 @@ export const getIdUser = (emailUser) => {
   };
 };
 
-// BACK-END
-// const URL_NAME= `https://rickandmortyapi.com/api/character/?name=Cool%20Rick`;
+export const getNameCharacter = (id) => {
+  return async function (dispatch) {
+    const URL_CHARACTER = `https://rickandmortyapi.com/api/character`;
+    const charactersSearch = (await axios.get(`${URL_CHARACTER}?name=${id}`))
+      .data;
+    dispatch({
+      type: GET_NAME_CHARACTER,
+      payload: charactersSearch,
+    });
+  };
+};
