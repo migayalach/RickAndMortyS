@@ -37,6 +37,12 @@ const getCharacter = async (dataType, id) => {
   }
 };
 
+const getNameCharacter = (name) => {};
+
+const getAllCharacter = () => {};
+
 module.exports = {
   getCharacter,
+  getNameCharacter,
+  getAllCharacter,
 };

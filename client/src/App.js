@@ -3,9 +3,8 @@ import axios from "axios";
 // HOOK'S
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeFav, getIdUser } from "./Redux/actions";
-
 
 // CSS
 import "./StyleSheets/App.css";
