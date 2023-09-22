@@ -36,16 +36,20 @@ const App = () => {
 
   const onSearch = async (id) => {
     try {
-      const responseApi = await axios(
-        `http://localhost:3001/rickandmorty/characters/${id}`
-      );
-      const dataClear = responseApi.data;
-      const respuesta = verificarPersonaje(dataClear.id, characters);
-      if (respuesta === true)
-        window.alert("El personaje ya existe no se puede repetir :C");
-      else {
-        if (dataClear.id) setCharacters((oldChars) => [...oldChars, dataClear]);
-        else window.alert("¡No hay personajes con este ID!");
+      if (id > 0 || id < 826) {
+        const responseApi = await axios(
+          `http://localhost:3001/rickandmorty/characters/${id}`
+        );
+        const dataClear = responseApi.data;
+        const respuesta = verificarPersonaje(dataClear.id, characters);
+        if (respuesta === true)
+          window.alert("El personaje ya existe no se puede repetir :C");
+        else {
+          if (dataClear.id) setCharacters((oldChars) => [...oldChars, dataClear]);
+          else window.alert("¡No hay personajes con este ID!");
+        }
+      } else {
+        console.log("nombre");
       }
     } catch (error) {
       alert("¡No hay personajes con este ID!");
