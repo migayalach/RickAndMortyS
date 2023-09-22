@@ -7,7 +7,6 @@ const {
 } = require("../Handlers/charactersHandlers");
 
 characterRouter.get("/:id", getCharacterHandler);
-
 characterRouter.get("/", getNameCharacterHandler);
 
 module.exports = characterRouter;

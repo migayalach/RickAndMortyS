@@ -23,7 +23,7 @@ const getNameCharacterHandler = async (request, response) => {
     const characterName = name
       ? await getNameCharacter(name)
       : await getAllCharacter();
-    response.status(SUCCESS).json(name);
+    response.status(SUCCESS).json(characterName);
   } catch (error) {
     response.status(ERROR).json({ error: error.message });
   }

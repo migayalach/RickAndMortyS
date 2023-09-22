@@ -1,3 +1,4 @@
+const clearResponse = require("../Utils/charactersUtils");
 const axios = require("axios");
 const URL = `https://rickandmortyapi.com/api/character`;
 
@@ -17,29 +18,13 @@ const getCharacter = async (dataType, id) => {
       return obj;
     }
     throw Error(`La API solo cuenta con 826 personajes`);
-  } else {
-    // OJO ESTO VEREMOS EN EL FRONT
-    const charcterApi = (await axios.get(`${URL}/?name=${id}`)).data.results;
-    const obj = charcterApi.map(
-      ({ id, name, gender, species, origin, image, status }) => {
-        return {
-          id,
-          name,
-          gender,
-          species,
-          origin,
-          image,
-          status,
-        };
-      }
-    );
-    return obj;
   }
 };
 
-const getNameCharacter = (name) => {};
+const getNameCharacter = async (name) =>
+  clearResponse((await axios.get(`${URL}/?name=${name}`)).data.results);
 
-const getAllCharacter = () => {};
+const getAllCharacter = async () => (await axios.get(`${URL}`)).data.results;
 
 module.exports = {
   getCharacter,
