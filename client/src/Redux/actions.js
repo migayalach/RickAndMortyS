@@ -96,7 +96,7 @@ export const getIdUser = (emailUser) => {
 
 export const getNameCharacter = (id) => {
   return async function (dispatch) {
-    const URL_CHARACTER = `https://rickandmortyapi.com/api/character`;
+    const URL_CHARACTER = `http://localhost:3001/rickandmorty/characters`;
     const charactersSearch = (await axios.get(`${URL_CHARACTER}?name=${id}`))
       .data;
     dispatch({

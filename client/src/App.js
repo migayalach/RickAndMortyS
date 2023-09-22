@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeFav, getIdUser } from "./Redux/actions";
+import { removeFav, getIdUser, getNameCharacter } from "./Redux/actions";
 
 // CSS
 import "./StyleSheets/App.css";
@@ -45,11 +45,12 @@ const App = () => {
         if (respuesta === true)
           window.alert("El personaje ya existe no se puede repetir :C");
         else {
-          if (dataClear.id) setCharacters((oldChars) => [...oldChars, dataClear]);
+          if (dataClear.id)
+            setCharacters((oldChars) => [...oldChars, dataClear]);
           else window.alert("¡No hay personajes con este ID!");
         }
       } else {
-        console.log("nombre");
+        dispatch(getNameCharacter(id));
       }
     } catch (error) {
       alert("¡No hay personajes con este ID!");

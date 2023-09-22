@@ -53,7 +53,11 @@ const reducer = (state = initialState, { type, payload }) => {
       };
 
     case GET_NAME_CHARACTER:
-      return console.log("holi");
+      return {
+        ...state,
+        myFavorites: payload,
+        aux: state.myFavorites,
+      };
 
     case ID_USER:
       return {
