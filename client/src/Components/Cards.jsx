@@ -1,5 +1,15 @@
+//HOOK'S
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+//COMPONENT'S
 import Card from "./Card";
+import Pagination from "./Pagination";
+
+//STYLESHEETS
 import "../StyleSheets/Cards.css";
+
+const itemsPerPage = 9;
 
 export default function Cards({ characters, onClose }) {
   return (
