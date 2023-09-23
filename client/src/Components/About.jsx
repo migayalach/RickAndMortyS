@@ -47,7 +47,7 @@ const About = () => {
         <span className="icons">
           Linkedin&nbsp;
           <a
-            href="https://www.linkedin.com/in/miguel-ayala-chavez-1a3205284/"
+            href="https://www.linkedin.com/in/miguel-ch%C3%A1vez-a-b51302288/"
             target="_blank"
           >
             <FaLinkedin />

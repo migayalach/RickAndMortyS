@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import "../StyleSheets/SearchBar.css";
+import SubMenu from "./SubMenu";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, logout }) => {
+  const navigate = useNavigate();
+
   const [id, setId] = useState("");
   const handleChange = (event) => {
     setId(event.target.value);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   const calback = () => {
@@ -32,6 +41,8 @@ const SearchBar = ({ onSearch }) => {
       <button className="aceptar" onClick={personajeAleatorio}>
         Random
       </button>
+      <SubMenu />
+      <button className="aceptar" onClick={handleLogout}>Salir</button>
     </div>
   );
 };

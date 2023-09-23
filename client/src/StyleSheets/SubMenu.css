@@ -1,0 +1,12 @@
+.navLink {
+  text-decoration: none;
+  color: #073b4c;
+  transition: 0.8s;
+  cursor: pointer;
+  user-select: none;
+}
+
+.navLink:hover {
+  background-color: #02c39a;
+  color: #f0ead2;
+}
