@@ -5,3 +5,16 @@
   justify-content: space-around;
   align-items: center;
 }
+
+/* Cards.css */
+
+.container-pagination {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white; /* Añadir un fondo blanco para que sea legible */
+  padding: 2px; /* Espaciado interior para que sea más visible */
+  display: flex;
+  justify-content: center;
+}
