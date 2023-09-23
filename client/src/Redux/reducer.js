@@ -9,6 +9,8 @@ import {
   GET_NAME_CHARACTER,
 } from "./action-types";
 
+import order from "../Functions/reducerClear";
+
 const initialState = {
   myFavorites: [],
   allCharacters: [],
@@ -74,11 +76,3 @@ const reducer = (state = initialState, { type, payload }) => {
 
 export default reducer;
 
-const order = (arr, str) => {
-  if (str === "A") {
-    return arr.sort();
-  }
-  if (str === "D") {
-    return arr.sort().reverse();
-  }
-};
