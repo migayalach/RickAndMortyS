@@ -1,6 +1,5 @@
 //HOOK'S
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 
 //COMPONENT'S
 import Card from "./Card";
@@ -19,7 +18,7 @@ export default function Cards({ characters, onClose }) {
   const indexOfLastItem = currentPage + itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentRecipes = characters.slice(indexOfFirstItem, indexOfLastItem);
-
+  
   useEffect(() => {
     setCurrentPage(1);
   }, [characters]);
