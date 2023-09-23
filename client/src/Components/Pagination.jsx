@@ -1,3 +1,5 @@
+import Form from "../StyleSheets/Pagination.css";
+
 const Pagination = ({
   dataLength,
   itemsPerPage,
@@ -42,17 +44,16 @@ const Pagination = ({
   };
 
   return (
-    <div>
-      <h1>Pagination</h1>
+    <div className="paginacion">
       {currentPage > 1 && (
         <span onClick={handlePrevClick} style={{ cursor: "pointer" }}>
-          {"<Prev>"}
+          {"<<Prev "}
         </span>
       )}
-      <div>{renderPageNumbers()}</div>
+      {renderPageNumbers()}
       {currentPage < totalPages && (
         <span onClick={handleNextClick} style={{ cursor: "pointer" }}>
-          {"Next"}
+          {" Next>>"}
         </span>
       )}
     </div>
