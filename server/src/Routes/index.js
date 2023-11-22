@@ -9,6 +9,6 @@ const levelRouter = require("./levelRouter");
 mainRouter.use("/characters", characterRouter); //OK
 mainRouter.use("/user", userRouter); //OK
 mainRouter.use("/favorite", favoriteRouter);
-mainRouter.user("level", levelRouter);
+mainRouter.use("level", levelRouter);
 
 module.exports = mainRouter;
