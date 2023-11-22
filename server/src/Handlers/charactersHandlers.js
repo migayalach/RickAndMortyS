@@ -25,13 +25,11 @@ const getNameCharacterHandler = async (request, response) => {
       : await getAllCharacter();
     response.status(SUCCESS).json(characterName);
   } catch (error) {
-    response
-      .status(ERROR)
-      .json({
-        character: false,
-        message: `No se encontro nada con el nombre buscado: ${name}`,
-        error: error.message,
-      });
+    response.status(ERROR).json({
+      character: false,
+      message: `No se encontro nada con el nombre buscado`,
+      error: error.message,
+    });
   }
 };
 
