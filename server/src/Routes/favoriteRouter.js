@@ -7,8 +7,8 @@ const {
 const { characterId } = require("../Middleware/characterMiddleware");
 const favoriteRouter = Router();
 
+favoriteRouter.get("/:id", characterId, allFavorites);
 favoriteRouter.post("/", postFavHandlers);
 favoriteRouter.delete("/:id", characterId, deleteFavHandlers);
-favoriteRouter.get("/:id", characterId, allFavorites);
 
 module.exports = favoriteRouter;
