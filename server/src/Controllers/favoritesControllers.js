@@ -35,8 +35,10 @@ const getFavorites = async (id) => {
       model: Favorite,
     },
   });
-  // return (favorites.Favorites);
-  return clearFavorites(favorites.Favorites);
+  if (favorites.length) {
+    return clearFavorites(favorites.Favorites);
+  }
+  throw Error`No se encontro ningun dato`;
 };
 
 const postFavorites = async ({
@@ -92,7 +94,7 @@ const deleteFav = async (id) => {
         FavoriteId: id,
       },
     });
-    
+
     await Favorite.destroy({
       where: {
         id,
