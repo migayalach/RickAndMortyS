@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { postUserMiddleware } = require("../Middleware/userMiddleware");
-const { characterId } = require("../Middleware/characterMiddleware");
+const { verityId } = require("../Middleware/toolsMiddleware");
 const {
   createUser,
   getUserId,
@@ -12,7 +12,7 @@ const {
 const userRouter = Router();
 
 userRouter.post("/", postUserMiddleware, createUser);
-userRouter.get("/:idUser", characterId, getUserId);
+userRouter.get("/:idUser", verityId, getUserId);
 userRouter.get("/", getNameUser);
 userRouter.put("/", updateUser);
 userRouter.delete("/:idUser", deleteUser);

@@ -4,11 +4,11 @@ const {
   deleteFavHandlers,
   allFavorites,
 } = require("../Handlers/favoritesHandlers");
-const { characterId } = require("../Middleware/characterMiddleware");
+const { verityId } = require("../Middleware/toolsMiddleware");
 const favoriteRouter = Router();
 
-favoriteRouter.get("/:id", characterId, allFavorites);
+favoriteRouter.get("/:id", verityId, allFavorites);
 favoriteRouter.post("/", postFavHandlers);
-favoriteRouter.delete("/:id", characterId, deleteFavHandlers);
+favoriteRouter.delete("/:id", verityId, deleteFavHandlers);
 
 module.exports = favoriteRouter;
