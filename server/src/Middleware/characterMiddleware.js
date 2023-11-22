@@ -1,8 +1,8 @@
 const characterId = (request, response, next) => {
-  const { id } = request.params;
+  const { id, idUser } = request.params;
   try {
-    if (!Number.isInteger(+id)) {
-      throw Error`solo numeros`;
+    if (!Number.isInteger(+id || +idUser)) {
+      throw Error`El tipo de dato que introdujo no es valido`;
     }
     return next();
   } catch (error) {
