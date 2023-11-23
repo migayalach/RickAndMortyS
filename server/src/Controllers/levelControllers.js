@@ -42,7 +42,15 @@ const getAllLevel = async () => {
   return getLevel;
 };
 
-const putLevel = () => {};
+const putLevel = async (idLevel, level) => {
+  const infoLevel = await Level.findOne({ where: { idLevel } });
+  if (!infoLevel) {
+    throw Error`El nivel: ${level} que intenda modificar no existe`;
+  }
+  await Level.update({ idLevel, level }, { where: { idLevel } });
+  return await getIdLevel(idLevel);
+};
+
 const levelDelete = () => {};
 
 module.exports = {
