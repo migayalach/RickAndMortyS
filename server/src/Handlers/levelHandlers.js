@@ -15,8 +15,8 @@ const createLevel = async (request, response) => {
     const newLevel = await postLevel(level);
     response.status(SUCCESS).json({
       createLevel: true,
-      newLevel,
       message: `Nivel: ${level}, creado con exito`,
+      newLevel,
     });
   } catch (error) {
     response.status(ERROR).json({ createLevel: false, error: error.message });
