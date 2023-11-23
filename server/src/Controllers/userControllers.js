@@ -16,9 +16,22 @@ const postUser = async ({ email, password, idLevel }) => {
 };
 
 const getIdUser = async (idUser) => {
-  const userData = [await User.findOne({ where: { id: idUser } })];
-  if (userData) {
-    return userData.map(({ id, email }) => ({ id, email }));
+  const existUser = await User.findOne({ where: { id: idUser } });
+  if (existUser) {
+    const {
+      id,
+      email,
+      Level: { idLevel, level },
+    } = await User.findOne({
+      where: { id: idUser },
+      include: {
+        model: Level,
+      },
+    });
+
+    if (id && idLevel && email && level) {
+      return { id, idLevel, email, level };
+    }
   }
   throw Error(`No se pudo encontrar ningun usuario`);
 };
