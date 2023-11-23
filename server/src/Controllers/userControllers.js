@@ -62,13 +62,21 @@ const getAllUser = async () => {
   throw Error(`No hay datos disponibles`);
 };
 
-const putUser = async (idUser, email, password) => {
+const putUser = async (idUser, idLevel, email, password) => {
   const updateUser = await User.findOne({ where: { id: idUser } });
   if (!updateUser) {
     throw Error(`El email: ${email}, no se encuentra registrado`);
   }
-  await User.update({ email, password }, { where: { id: idUser } });
-  return await getIdUser(idUser);
+  if (!(await Level.findOne({ where: { idLevel } }))) {
+    throw Error`El nivel no se encuentra registrado`;
+  }
+  await User.update(
+    { email, password, LevelIdLevel: idLevel },
+    { where: { id: idUser } }
+  );
+  const infoUser = await getIdUser(idUser);
+  const getUserAll = await getAllUser();
+  return { infoUser, getUserAll };
 };
 
 const userDetele = async (idUser) => {
