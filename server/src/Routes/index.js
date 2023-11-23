@@ -6,8 +6,8 @@ const favoriteRouter = require("./favoriteRouter");
 const userRouter = require("./userRouter");
 const levelRouter = require("./levelRouter");
 
-mainRouter.use("/characters", characterRouter); //OK
-mainRouter.use("/user", userRouter); //OK
+mainRouter.use("/characters", characterRouter);
+mainRouter.use("/user", userRouter);
 mainRouter.use("/favorite", favoriteRouter);
 mainRouter.use("/level", levelRouter);
 
