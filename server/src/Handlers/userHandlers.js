@@ -21,7 +21,6 @@ const createUser = async (request, response) => {
   }
 };
 
-// ADMIN PUEDE VER LA LISTA DE USUARIOS por id, nombre o todo
 const getUserId = async (request, response) => {
   const { idUser } = request.params;
   try {
@@ -34,6 +33,7 @@ const getUserId = async (request, response) => {
     });
   }
 };
+
 const getNameUser = async (request, response) => {
   const { email } = request.query;
   try {
@@ -45,13 +45,13 @@ const getNameUser = async (request, response) => {
 };
 
 const updateUser = async (request, response) => {
-  const { idUser, email, password } = request.body;
+  const { idUser, idLevel, email, password } = request.body;
   try {
-    const userUpdate = await putUser(idUser, email, password);
+    const userUpdate = await putUser(idUser, idLevel, email, password);
     response.status(SUCCESS).json({
       updateUser: true,
-      userUpdate,
       message: "Usuaro actualizado con exito",
+      userUpdate,
     });
   } catch (error) {
     response.status(ERROR).json({ updateUser: false, error: error.message });
