@@ -94,39 +94,11 @@ const userDetele = async (idUser) => {
   return await getAllUser();
 };
 
-const getLogin = async ({ email, password }) => {
-  if (!email || !password) {
-    throw Error(`Faltan datos`);
-  }
-  if (await User.findOne({ where: { email } })) {
-    if (await User.findOne({ where: { password } })) {
-      return { access: true };
-    }
-    throw Error(`La constraseña: ${password} es incorrecta`);
-  }
-  throw Error(`El email: ${email} no se lo pudo encontrar`);
-};
-
-const searchInfo = async ({ email }) => {
-  const result = await User.findOne({
-    attributes: ["id"],
-    where: {
-      email,
-    },
-  });
-  if (!result) {
-    throw Error(`Este usuario no existe`);
-  }
-  return { infoUser: result.id };
-};
-
 module.exports = {
   postUser,
   getIdUser,
   getUserName,
   getAllUser,
-  getLogin,
   putUser,
   userDetele,
-  searchInfo,
 };

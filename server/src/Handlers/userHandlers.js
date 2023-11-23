@@ -5,10 +5,8 @@ const {
   getIdUser,
   getUserName,
   getAllUser,
-  getLogin,
   putUser,
   userDetele,
-  searchInfo,
 } = require("../Controllers/userControllers");
 
 const createUser = async (request, response) => {
@@ -58,7 +56,6 @@ const updateUser = async (request, response) => {
   }
 };
 
-// SOLO EL ADMIN PUEDE ELIMINAR CUENTAS
 const deleteUser = async (request, response) => {
   const { idUser } = request.params;
   try {
@@ -73,26 +70,10 @@ const deleteUser = async (request, response) => {
   }
 };
 
-const loginHandlers = async (request, response) => {
-  const { email, password } = request.query;
-  try {
-    if (email && !password) {
-      const infoUser = await searchInfo({ email });
-      response.status(SUCCESS).json(infoUser);
-    } else {
-      const access = await getLogin({ email, password });
-      response.status(SUCCESS).json(access);
-    }
-  } catch (error) {
-    response.status(ERROR).json({ error: error.message });
-  }
-};
-
 module.exports = {
   createUser,
   getUserId,
   getNameUser,
   updateUser,
   deleteUser,
-  loginHandlers,
 };
