@@ -17,31 +17,34 @@ const postUser = async ({ email, password, idLevel }) => {
 
 const getIdUser = async (idUser) => {
   const existUser = await User.findOne({ where: { id: idUser } });
-  if (existUser) {
-    const {
-      id,
-      email,
-      Level: { idLevel, level },
-    } = await User.findOne({
-      where: { id: idUser },
-      include: {
-        model: Level,
-      },
-    });
-
-    if (id && idLevel && email && level) {
-      return { id, idLevel, email, level };
-    }
+  if (!existUser) {
+    throw Error(`No se pudo encontrar ningun usuario`);
   }
-  throw Error(`No se pudo encontrar ningun usuario`);
+  const {
+    id,
+    email,
+    Level: { idLevel, level },
+  } = await User.findOne({
+    where: { id: idUser },
+    include: {
+      model: Level,
+    },
+  });
+  return { id, idLevel, email, level };
 };
 
 const getUserName = async (email) => {
   const userData = await User.findAll({
     where: { email: { [Op.iLike]: `%${email}%` } },
+    include: { model: Level },
   });
   if (userData.length) {
-    return userData.map(({ id, email }) => ({ id, email }));
+    return userData.map(({ id, email, Level: { idLevel, level } }) => ({
+      id,
+      idLevel,
+      email,
+      level,
+    }));
   }
   throw Error(`El email: ${email} no existe`);
 };
