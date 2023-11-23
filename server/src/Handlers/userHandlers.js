@@ -64,9 +64,9 @@ const deleteUser = async (request, response) => {
   try {
     const responseData = await userDetele(idUser);
     response.status(SUCCESS).json({
+      message: "Usuaro eliminado con exito",
       deleteUser: true,
       responseData,
-      message: "Usuaro eliminado con exito",
     });
   } catch (error) {
     response.status(ERROR).json({ deleteUser: false, error: error.message });
