@@ -1,3 +1,4 @@
+const { Op } = require("sequelize");
 const { Level } = require("../DataBase/dataBase");
 
 const postLevel = async (level) => {
@@ -19,7 +20,19 @@ const getIdLevel = async (idLevel) => {
   return searchIdLevel;
 };
 
-const getLevelName = () => {};
+const getLevelName = async (level) => {
+  const searchLevel = await Level.findAll({
+    where: {
+      level: {
+        [Op.iLike]: `%${level}%`,
+      },
+    },
+  });
+  if (!searchLevel.length) {
+    throw Error`No se encontro nada para mostrar`;
+  }
+  return searchLevel;
+};
 
 const getAllLevel = async () => {
   const getLevel = await Level.findAll();
