@@ -13,13 +13,11 @@ const createLevel = async (request, response) => {
   const { level } = request.body;
   try {
     const newLevel = await postLevel(level);
-    response
-      .status(SUCCESS)
-      .json({
-        createLevel: true,
-        newLevel,
-        message: `Nivel: ${level}, creado con exito`,
-      });
+    response.status(SUCCESS).json({
+      createLevel: true,
+      newLevel,
+      message: `Nivel: ${level}, creado con exito`,
+    });
   } catch (error) {
     response.status(ERROR).json({ createLevel: false, error: error.message });
   }
@@ -28,8 +26,8 @@ const createLevel = async (request, response) => {
 const getLevelId = async (request, response) => {
   const { idLevel } = request.params;
   try {
-    const getId = await getIdLevel(idLevel);
-    response.status(SUCCESS).json({ getLevelId: true, getId });
+    const searchIdLevel = await getIdLevel(idLevel);
+    response.status(SUCCESS).json({ getLevelId: true, searchIdLevel });
   } catch (error) {
     response.status(ERROR).json({ getLevelId: false, error: error.message });
   }
