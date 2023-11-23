@@ -50,9 +50,14 @@ const getUserName = async (email) => {
 };
 
 const getAllUser = async () => {
-  const usersData = await User.findAll();
+  const usersData = await User.findAll({ include: { model: Level } });
   if (usersData.length) {
-    return usersData.map(({ id, email }) => ({ id, email }));
+    return usersData.map(({ id, email, Level: { idLevel, level } }) => ({
+      id,
+      idLevel,
+      level,
+      email,
+    }));
   }
   throw Error(`No hay datos disponibles`);
 };
