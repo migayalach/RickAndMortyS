@@ -8,7 +8,17 @@ const postLevel = async (level) => {
   await Level.create({ level });
   return await getAllLevel();
 };
-const getIdLevel = () => {};
+const getIdLevel = async (idLevel) => {
+  const searchIdLevel = await Level.findOne({
+    attibutes: ["level"],
+    where: { idLevel },
+  });
+  if (!searchIdLevel) {
+    throw Error`No se pudo encontrar lo que busca`;
+  }
+  return searchIdLevel;
+};
+
 const getLevelName = () => {};
 
 const getAllLevel = async () => {
