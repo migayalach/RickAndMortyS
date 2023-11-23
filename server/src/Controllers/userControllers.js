@@ -1,10 +1,15 @@
-const { User } = require("../DataBase/dataBase");
+const { User, Level } = require("../DataBase/dataBase");
 const { Op } = require("sequelize");
 
-const postUser = async ({ email, password }) => {
+const postUser = async ({ email, password, idLevel }) => {
+  const existLevel = await Level.findByPk(idLevel);
+  if (!existLevel) {
+    throw Error`El nivel que intenta asignar no se encuentra registrado`;
+  }
   const user = await User.findOne({ where: { email } });
   if (!user) {
-    await User.create({ email, password });
+    const createUser = await User.create({ email, password });
+    await createUser.setLevel(existLevel);
     return { create: true };
   }
   throw Error(`El email: ${email} ya se encuentra registrado`);
