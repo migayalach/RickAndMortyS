@@ -51,7 +51,14 @@ const putLevel = async (idLevel, level) => {
   return await getIdLevel(idLevel);
 };
 
-const levelDelete = () => {};
+const levelDelete = async (idLevel) => {
+  const infoLevel = await Level.findOne({ where: { idLevel } });
+  if (!infoLevel) {
+    throw Error`El nivel que intenda eliminar no existe`;
+  }
+  await Level.destroy({ where: { idLevel } });
+  return await getAllLevel();
+};
 
 module.exports = {
   postLevel,
