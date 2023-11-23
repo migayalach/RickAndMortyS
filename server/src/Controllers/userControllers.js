@@ -1,5 +1,8 @@
 const { User, Level } = require("../DataBase/dataBase");
 const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
+
+const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
 const postUser = async ({ email, password, idLevel }) => {
   const existLevel = await Level.findByPk(idLevel);
@@ -8,7 +11,10 @@ const postUser = async ({ email, password, idLevel }) => {
   }
   const user = await User.findOne({ where: { email } });
   if (!user) {
-    const createUser = await User.create({ email, password });
+    const createUser = await User.create({
+      email,
+      password: await hashedPassword(`${password}`),
+    });
     await createUser.setLevel(existLevel);
     return { create: true };
   }
