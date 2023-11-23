@@ -57,9 +57,16 @@ const deleteLevel = async (request, response) => {
   const { idLevel } = request.params;
   try {
     const delLevel = await levelDelete(idLevel);
-    response.status(SUCCESS).json({ deleteLevel: true, delLevel });
+    response.status(SUCCESS).json({
+      deleteLevel: true,
+      message: `Nivel eliminado con exito`,
+      delLevel,
+    });
   } catch (error) {
-    response.status(ERROR).json({ deleteLevel: false, error: error.message });
+    response.status(ERROR).json({
+      deleteLevel: false,
+      error: error.message,
+    });
   }
 };
 
