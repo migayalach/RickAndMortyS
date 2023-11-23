@@ -18,7 +18,7 @@ favoriteModel(sequelize);
 level(sequelize);
 
 const { User, Favorite, Level } = sequelize.models;
-User.belongsToMany(Favorite, { through: "SUserFavorite", timestamps: false });
+User.belongsToMany(Favorite, { through: "UserFavorite", timestamps: false });
 Favorite.belongsToMany(User, { through: "UserFavorite", timestamps: false });
 Level.hasMany(User, { timestamps: false });
 User.belongsTo(Level);
