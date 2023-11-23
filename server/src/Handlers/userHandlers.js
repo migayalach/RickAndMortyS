@@ -31,7 +31,6 @@ const getUserId = async (request, response) => {
     response.status(ERROR).json({
       getUserId: false,
       error: error.message,
-      message: "No se pudo encontrar ningun usuario",
     });
   }
 };
