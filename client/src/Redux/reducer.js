@@ -7,6 +7,7 @@ import {
   GET_ALL_FAVORITES,
   ID_USER,
   GET_NAME_CHARACTER,
+  LOGIN_USER,
 } from "./action-types";
 
 import order from "../Functions/reducerClear";
@@ -15,11 +16,17 @@ const initialState = {
   myFavorites: [],
   allCharacters: [],
   aux: [],
-  infoUser: {},
+  infoUser: null,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case LOGIN_USER:
+      return {
+        ...state,
+        infoUser: payload.loginUser,
+      };
+
     case GET_CHARACTERS:
       return {
         ...state,
