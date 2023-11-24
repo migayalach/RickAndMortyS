@@ -14,7 +14,7 @@ const loginAcces = async (email, password) => {
       access: true,
       idlevel: infoUser.Level.idLevel,
       level: infoUser.Level.level,
-      message: `Bienvenido: ${email}`,
+      user: email,
     };
   }
   return { access: false, message: `¡Contraseña: ${password}, no valida!` };
