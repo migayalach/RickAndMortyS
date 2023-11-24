@@ -1,13 +1,23 @@
+// COMPONET'S
 import React from "react";
 import SearchBar from "./SearchBar";
 
-const Nav = ({ onSearch, logout, email }) => {
+// HOOK'S
+import { useSelector } from "react-redux";
+
+// LIBRARY
+// REDUX
+// JAVASCRIP
+// STYLESHEET'S
+
+const Nav = ({ onSearch, logout }) => {
+  const { user } = useSelector((state) => state.infoUser);
   return (
     <div>
       <SearchBar onSearch={onSearch} logout={logout} />
       <div>
         <p>
-          Bienvenid@: <span>{email}</span>
+          Bienvenid@: <span>{user}</span>
         </p>
       </div>
     </div>
