@@ -6,3 +6,4 @@ export const GET_CHARACTERS = "GET_CHARACTERS";
 export const GET_ALL_FAVORITES = "GET_ALL_FAVORITES";
 export const ID_USER = "ID_USER";
 export const GET_NAME_CHARACTER = "GET_NAME_CHARACTER";
+export const LOGIN_USER = "LOGIN_USER";
