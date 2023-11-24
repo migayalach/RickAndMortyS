@@ -8,6 +8,7 @@ import {
   GET_ALL_FAVORITES,
   ID_USER,
   GET_NAME_CHARACTER,
+  LOGIN_USER,
 } from "./action-types";
 
 const URL = `https://rickandmortyapi.com/api/character`;
@@ -103,5 +104,17 @@ export const getNameCharacter = (id) => {
       type: GET_NAME_CHARACTER,
       payload: charactersSearch,
     });
+  };
+};
+
+export const loginUser = (userData) => {
+  return async function (dispatch) {
+    try {
+      const URL = "http://localhost:3001/rickandmorty/login";
+      dispatch({
+        type: LOGIN_USER,
+        payload: (await axios.post(`${URL}`, userData)).data,
+      });
+    } catch (error) {}
   };
 };
