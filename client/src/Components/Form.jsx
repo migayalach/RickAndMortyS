@@ -1,9 +1,22 @@
-// HOOK´S
+// COMPONET'S
+
+// HOOK'S
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+// LIBRARY
+
+// REDUX
+import { loginUser } from "../Redux/actions";
+
+// JAVASCRIP
 import validation from "../Utils/validation";
+
+// STYLESHEET'S
 import "../StyleSheets/Form.css";
 
 const Form = ({ login, signUp }) => {
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -11,7 +24,7 @@ const Form = ({ login, signUp }) => {
 
   const [errors, setErrors] = useState({});
 
-  const [userOption, setUserOption] = useState("Login");
+  const [userOption, setUserOption] = useState("Check In");
 
   const handleOption = () => {
     userOption === "Login" ? setUserOption("Check In") : setUserOption("Login");
@@ -31,13 +44,11 @@ const Form = ({ login, signUp }) => {
     const optionButton = event.target.name;
     if (optionButton === "login") {
       event.preventDefault();
-      login(userData);
+      dispatch(loginUser(userData));
     } else {
-      signUp(userData);
       event.preventDefault();
     }
   };
-
   return (
     <form className="form-component">
       <img
@@ -70,16 +81,14 @@ const Form = ({ login, signUp }) => {
         required
         maxLength="10"
       />
-      {errors.password && <p className="error">{errors.password}</p>}
+      {/* {errors.password && <p className="error">{errors.password}</p>} */}
       {userOption === "Check In" ? (
         <button className="btn-envio" name="login" onClick={handleSubmit}>
-          {" "}
-          Login{" "}
+          Login
         </button>
       ) : (
         <button className="btn-registro" name="checkIn" onClick={handleSubmit}>
-          {" "}
-          Check in{" "}
+          Check in
         </button>
       )}
       <p className="text-option" onClick={handleOption}>
