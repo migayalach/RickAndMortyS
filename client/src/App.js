@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* {location.pathname !== "/" && <Nav />} */}
+      {location.pathname !== "/" && <Nav />}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -42,7 +42,7 @@ const App = () => {
           element={<Home />}
           // element={<Cards />}
         />
-        {/* <Route path="/about" element={<About />} /> */}
+        <Route path="/about" element={<About />} />
         {/* <Route path="/detail/:id" element={<Detail />} /> */}
         {/* <Route path=":id" element={<Error />} /> */}
         {/* <Route path="/favorites" element={<Favorites />} /> */}
