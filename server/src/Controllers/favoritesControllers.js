@@ -1,4 +1,4 @@
-const { User, Favorite, UserFavorite } = require("../DataBase/dataBase");
+const { User, Favorite, UserFavorites } = require("../DataBase/dataBase");
 
 const clearFavorites = (arr) =>
   arr.map(
@@ -29,14 +29,18 @@ const clearFavorites = (arr) =>
 
 //no debe haber repetidos
 const getFavorites = async (id) => {
-  const favorites = await User.findOne({
+  const user = await User.findOne({ where: { id } });
+  if (!user) {
+    throw Error(`Este usuario no se encuentra registrado`);
+  }
+  const favorites = await User.findAll({
     where: { id },
     include: {
       model: Favorite,
     },
   });
-  if (favorites.length) {
-    return clearFavorites(favorites.Favorites);
+  if (favorites) {
+    return favorites[0].Favorites;
   }
   throw Error`No se encontro ningun dato`;
 };
@@ -76,8 +80,12 @@ const postFavorites = async ({
 };
 
 //si no existe el elemento aca devolver error
-const deleteFav = async (id) => {
-  console.log(id);
+const deleteFav = async (idUser, id) => {
+  const existUser = await User.findOne({ where: { id: idUser } });
+  if (!existUser) {
+    throw Error(`Este usuario no existe`);
+  }
+
   const deleteFavorite = await Favorite.findByPk(id, {
     attributes: ["idPerson"],
     include: [
@@ -87,23 +95,25 @@ const deleteFav = async (id) => {
       },
     ],
   });
-  if (deleteFavorite) {
-    const idUser = deleteFavorite.dataValues.Users[0].dataValues.id;
-    await UserFavorite.destroy({
-      where: {
-        FavoriteId: id,
-      },
-    });
 
-    await Favorite.destroy({
-      where: {
-        id,
-      },
-    });
-
-    return await getFavorites(idUser);
+  if (!deleteFavorite) {
+    throw Error(`El personaje que quiere eliminar no se encuentra registrado`);
   }
-  throw Error`El personaje: ${id}, no se encuentra registrado`;
+
+  await UserFavorites.destroy({
+    where: {
+      FavoriteId: id,
+      UserId: idUser,
+    },
+  });
+
+  await Favorite.destroy({
+    where: {
+      id,
+    },
+  });
+
+  return await getFavorites(idUser);
 };
 
 module.exports = { postFavorites, deleteFav, getFavorites };
