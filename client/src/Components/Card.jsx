@@ -15,12 +15,9 @@ const Card = ({
   onClose,
 }) => {
   const recipe = useSelector((state) => state.myFavorites);
-  const idUserEnv = useSelector(({ infoUser }) => infoUser);
-  const idUser = idUserEnv.infoUser;
-  
+  const { idUser } = useSelector((state) => state.infoUser);
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
-
   const getIdPersonBDD = (idSearch) => {
     const aux = recipe.filter(({ idPerson }) => idPerson === idSearch);
     return aux[0].id;
@@ -29,7 +26,7 @@ const Card = ({
     if (isFav === true) {
       setIsFav(false);
       const idPerson = getIdPersonBDD(id);
-      dispatch(removeFav(idPerson));
+      dispatch(removeFav(idUser, idPerson));
     } else {
       setIsFav(true);
       dispatch(
@@ -55,6 +52,7 @@ const Card = ({
       }
     });
   }, [recipe]);
+
 
   return (
     <div className="card-container">
