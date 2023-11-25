@@ -7,7 +7,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
-        // defaultValue: DataTypes.UUIDV4,
       },
       idPerson: {
         type: DataTypes.INTEGER,

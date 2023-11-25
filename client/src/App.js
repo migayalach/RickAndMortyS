@@ -79,8 +79,6 @@ const App = () => {
       : deletePerson(id);
   };
 
-  const login = (userData) => {};
-
   const signUp = async (userData) => {
     const URL = `http://localhost:3001/rickandmorty/user`;
     const { email } = userData;
@@ -131,7 +129,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/" element={<Form login={login} signUp={signUp} />} />
+        <Route path="/" element={<Form signUp={signUp} />} />
         <Route path="/about" element={<About />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path=":id" element={<Error />} />

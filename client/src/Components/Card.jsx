@@ -53,7 +53,6 @@ const Card = ({
     });
   }, [recipe]);
 
-
   return (
     <div className="card-container">
       {isFav ? (
@@ -70,8 +69,7 @@ const Card = ({
               : onClose(getIdPersonBDD(id), "bdd", id)
           }
         >
-          {" "}
-          X{" "}
+          X
         </button>
       </div>
       <Link to={`/detail/${id}`}>

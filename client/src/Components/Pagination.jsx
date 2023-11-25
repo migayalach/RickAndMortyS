@@ -1,5 +1,3 @@
-import Form from "../StyleSheets/Pagination.css";
-
 const Pagination = ({
   dataLength,
   itemsPerPage,

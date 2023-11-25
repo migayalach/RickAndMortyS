@@ -61,8 +61,7 @@ const Favorites = ({ idUser }) => {
           return (
             <div className="card-container" key={id}>
               <button name={id} onClick={handleFavorite}>
-                {" "}
-                ❤️{" "}
+                ❤️
               </button>
               <div>
                 <Link to={`/detail/${idPerson}`}>
