@@ -4,21 +4,60 @@ const bcrypt = require("bcrypt");
 
 const hashedPassword = async (password) => await bcrypt.hash(password, 10);
 
+const level = async (str) =>
+  await Level.findAll({
+    where: {
+      level: {
+        [Op.like]: `%${str}%`,
+      },
+    },
+    attibutes: [`idLevel`],
+  });
+
 const postUser = async ({ email, password, idLevel }) => {
-  const existLevel = await Level.findByPk(idLevel);
-  if (!existLevel) {
-    throw Error`El nivel que intenta asignar no se encuentra registrado`;
+  const count = await User.count();
+  const searchData = await level("admin");
+  if (!searchData) {
+    throw Error`No hay registros en Level`;
   }
-  const user = await User.findOne({ where: { email } });
-  if (!user) {
+  if (count === 0 && !idLevel) {
     const createUser = await User.create({
       email,
       password: await hashedPassword(`${password}`),
     });
-    await createUser.setLevel(existLevel);
+    await createUser.setLevel(searchData[0].idLevel);
     return { create: true };
+  } else if (idLevel && !password) {
+    const existLevel = await Level.findByPk(idLevel);
+    if (!existLevel) {
+      throw Error`El nivel que intenta asignar no se encuentra registrado`;
+    }
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      const createUser = await User.create({
+        email,
+        password: await hashedPassword(`${email}2023`),
+      });
+      await createUser.setLevel(existLevel);
+      return { create: true };
+    }
+    throw Error(`El email: ${email} ya se encuentra registrado`);
+  } else if (!idLevel && email && password) {
+    const searchData = await level("standar");
+    if (!searchData.length) {
+      throw Error`El nivel que intenta asignar no se encuentra registrado`;
+    }
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      const createUser = await User.create({
+        email,
+        password: await hashedPassword(`${password}`),
+      });
+      await createUser.setLevel(searchData[0].idLevel);
+      return { create: true };
+    }
+    throw Error(`El email: ${email} ya se encuentra registrado`);
   }
-  throw Error(`El email: ${email} ya se encuentra registrado`);
 };
 
 const getIdUser = async (idUser) => {
