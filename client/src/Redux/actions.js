@@ -9,6 +9,7 @@ import {
   ID_USER,
   GET_NAME_CHARACTER,
   LOGIN_USER,
+  CREATE_USER,
 } from "./action-types";
 
 const URL = `https://rickandmortyapi.com/api/character`;
@@ -28,8 +29,8 @@ export const addFav = (character) => {
   };
 };
 
-export const removeFav = (id) => {
-  const endpoint = `http://localhost:3001/rickandmorty/favorite/${id}`;
+export const removeFav = (idUser, id) => {
+  const endpoint = `http://localhost:3001/rickandmorty/favorite/${idUser}/${id}`;
   return async (dispatch) => {
     try {
       const responseRoute = (await axios.delete(endpoint)).data;
@@ -84,17 +85,6 @@ export const getCharacters = () => {
   };
 };
 
-export const getIdUser = (emailUser) => {
-  return async function (dispatch) {
-    const URL_DATA = `http://localhost:3001/rickandmorty/user`;
-    const infoUser = (await axios.get(`${URL_DATA}?email=${emailUser}`)).data;
-    dispatch({
-      type: ID_USER,
-      payload: infoUser,
-    });
-  };
-};
-
 export const getNameCharacter = (id) => {
   return async function (dispatch) {
     const URL_CHARACTER = `http://localhost:3001/rickandmorty/characters`;
@@ -113,6 +103,18 @@ export const loginUser = (userData) => {
       const URL = "http://localhost:3001/rickandmorty/login";
       dispatch({
         type: LOGIN_USER,
+        payload: (await axios.post(`${URL}`, userData)).data,
+      });
+    } catch (error) {}
+  };
+};
+
+export const createAccount = (userData) => {
+  return async function (dispatch) {
+    try {
+      const URL = "http://localhost:3001/rickandmorty/user";
+      dispatch({
+        type: CREATE_USER,
         payload: (await axios.post(`${URL}`, userData)).data,
       });
     } catch (error) {}
