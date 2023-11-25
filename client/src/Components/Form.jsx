@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 // LIBRARY
 
 // REDUX
-import { loginUser } from "../Redux/actions";
+import { loginUser, createAccount } from "../Redux/actions";
 
 // JAVASCRIP
 import validation from "../Utils/validation";
@@ -17,6 +17,7 @@ import "../StyleSheets/Form.css";
 
 const Form = ({ login, signUp }) => {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -45,8 +46,9 @@ const Form = ({ login, signUp }) => {
     if (optionButton === "login") {
       event.preventDefault();
       dispatch(loginUser(userData));
-    } else {
+    } else if (optionButton === "checkIn") {
       event.preventDefault();
+      dispatch(createAccount(userData));
     }
   };
   return (
@@ -73,7 +75,7 @@ const Form = ({ login, signUp }) => {
         Password
       </label>
       <input
-        type="password"
+        type={showPassword ? "text" : "password"}
         value={userData.password}
         name="password"
         onChange={handleChange}
@@ -82,13 +84,23 @@ const Form = ({ login, signUp }) => {
         maxLength="10"
       />
       {/* {errors.password && <p className="error">{errors.password}</p>} */}
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        className={`toggle-password-button ${
+          showPassword ? "show-password" : "hide-password"
+        }`}
+      >
+        {showPassword ? "Disguise" : "Show"} password
+      </button>
+
       {userOption === "Check In" ? (
         <button className="btn-envio" name="login" onClick={handleSubmit}>
           Login
         </button>
       ) : (
         <button className="btn-registro" name="checkIn" onClick={handleSubmit}>
-          Check in
+          Create new account
         </button>
       )}
       <p className="text-option" onClick={handleOption}>
