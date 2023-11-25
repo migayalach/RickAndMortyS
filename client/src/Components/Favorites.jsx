@@ -10,16 +10,14 @@ import {
 } from "../Redux/actions";
 import "../StyleSheets/Card.css";
 
-const Favorites = () => {
+const Favorites = ({ idUser }) => {
   const [aux, setAux] = useState(false);
   const recipe = useSelector((state) => state.myFavorites);
-  const idUserEnv = useSelector(({ infoUser }) => infoUser);
-  const idUser = idUserEnv.infoUser;
   const dispatch = useDispatch();
 
   const handleFavorite = (event) => {
     const id = event.target.name;
-    dispatch(removeFav(id));
+    dispatch(removeFav(idUser, id));
   };
 
   const handleOrder = (event) => {
@@ -61,22 +59,22 @@ const Favorites = () => {
       {recipe?.map(
         ({ id, idPerson, name, origin, status, species, gender, image }) => {
           return (
-              <div className="card-container" key={id}>
-                <button name={id} onClick={handleFavorite}>
-                  {" "}
-                  ❤️{" "}
-                </button>
-                <div>
-                  <Link to={`/detail/${idPerson}`}>
-                    <h2 className="nombre">{name}</h2>
-                  </Link>
-                  <img className="imagen" src={image} alt={name} />
-                  <div className="pie-de-pagina">
-                    <h2 className="datos">{species}</h2>
-                    <h2 className="datos">{gender}</h2>
-                  </div>
+            <div className="card-container" key={id}>
+              <button name={id} onClick={handleFavorite}>
+                {" "}
+                ❤️{" "}
+              </button>
+              <div>
+                <Link to={`/detail/${idPerson}`}>
+                  <h2 className="nombre">{name}</h2>
+                </Link>
+                <img className="imagen" src={image} alt={name} />
+                <div className="pie-de-pagina">
+                  <h2 className="datos">{species}</h2>
+                  <h2 className="datos">{gender}</h2>
                 </div>
               </div>
+            </div>
           );
         }
       )}
