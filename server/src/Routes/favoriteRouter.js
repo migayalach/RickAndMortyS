@@ -9,6 +9,6 @@ const favoriteRouter = Router();
 
 favoriteRouter.get("/:id", verityId, allFavorites);
 favoriteRouter.post("/", postFavHandlers);
-favoriteRouter.delete("/:id", verityId, deleteFavHandlers);
+favoriteRouter.delete("/:idUser/:id", verityId, deleteFavHandlers);
 
 module.exports = favoriteRouter;
