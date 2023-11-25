@@ -18,7 +18,6 @@ export default function Cards({ characters, onClose }) {
   const indexOfLastItem = currentPage + itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentRecipes = characters.slice(indexOfFirstItem, indexOfLastItem);
-  
   useEffect(() => {
     setCurrentPage(1);
   }, [characters]);
