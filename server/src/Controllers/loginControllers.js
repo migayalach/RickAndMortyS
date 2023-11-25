@@ -12,7 +12,8 @@ const loginAcces = async (email, password) => {
   if (await bcrypt.compare(password, infoUser.password)) {
     return {
       access: true,
-      idlevel: infoUser.Level.idLevel,
+      idLevel: infoUser.Level.idLevel,
+      idUser: infoUser.id,
       level: infoUser.Level.level,
       user: email,
     };
