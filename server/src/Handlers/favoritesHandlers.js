@@ -27,9 +27,9 @@ const postFavHandlers = async (request, response) => {
 };
 
 const deleteFavHandlers = async (request, response) => {
-  const { id } = request.params;
+  const { idUser, id } = request.params;
   try {
-    const actionResponse = await deleteFav(id);
+    const actionResponse = await deleteFav(idUser, id);
     response.status(SUCCESS).json(actionResponse);
   } catch (error) {
     response.status(ERROR).json({ error: error.message });
