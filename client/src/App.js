@@ -26,17 +26,11 @@ const App = () => {
   const [characters, setCharacters] = useState([]);
   const [email, setEmail] = useState("");
 
-  useEffect(() => {
-    !access && navigate("/");
-    setCharacters([]);
-  }, [access]);
-
   const onSearch = async (id) => {
+    const URL = `http://localhost:3001/rickandmorty/characters`;
     try {
-      if (id > 0 || id < 826) {
-        const responseApi = await axios(
-          `http://localhost:3001/rickandmorty/characters/${id}`
-        );
+      if (id > 0 || (id < 826 && Number.isInteger(+id))) {
+        const responseApi = await axios(`${URL}/${id}`);
         const dataClear = responseApi.data;
         const respuesta = verificarPersonaje(dataClear.id, characters);
         if (respuesta === true)
@@ -47,7 +41,8 @@ const App = () => {
           else window.alert("¡No hay personajes con este ID!");
         }
       } else {
-        dispatch(getNameCharacter(id));
+        const responseApi = (await axios(`${URL}?name=${id}`)).data;
+        setCharacters((oldChars) => [...oldChars, ...responseApi]);
       }
     } catch (error) {
       alert("¡No hay personajes con este ID!");
@@ -75,7 +70,7 @@ const App = () => {
 
   const onClose = (id, str, idFav) => {
     str === "bdd"
-      ? dispatch(removeFav(selectUser?.idUser,id)) && deletePerson(idFav)
+      ? dispatch(removeFav(selectUser?.idUser, id)) && deletePerson(idFav)
       : deletePerson(id);
   };
 
@@ -98,11 +93,15 @@ const App = () => {
       alert("error");
     }
   };
-
   const logout = () => {
     localStorage.removeItem("access");
     setAccess(false);
   };
+
+  useEffect(() => {
+    !access && navigate("/");
+    setCharacters([]);
+  }, [access]);
 
   useEffect(() => {
     if (selectUser && selectUser.access === true) {
@@ -135,7 +134,9 @@ const App = () => {
         <Route path=":id" element={<Error />} />
         <Route
           path="/favorites"
-          element={<Favorites idUser={selectUser?.idUser} />}
+          element={
+            <Favorites idUser={selectUser?.idUser} user={selectUser?.user} />
+          }
         />
       </Routes>
     </div>

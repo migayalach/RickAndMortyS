@@ -1,31 +1,6 @@
 const { User, Favorite, UserFavorites } = require("../DataBase/dataBase");
-
-const clearFavorites = (arr) =>
-  arr.map(
-    ({
-      id,
-      idPerson,
-      name,
-      status,
-      species,
-      gender,
-      origin,
-      image,
-      create,
-    }) => {
-      return {
-        id,
-        idPerson,
-        name,
-        status,
-        species,
-        gender,
-        origin,
-        image,
-        create,
-      };
-    }
-  );
+const { getUserName } = require("./userControllers");
+const { orderFuc, filterCards } = require("../Utils/toolsFunctions");
 
 //no debe haber repetidos
 const getFavorites = async (id) => {
@@ -116,4 +91,31 @@ const deleteFav = async (idUser, id) => {
   return await getFavorites(idUser);
 };
 
-module.exports = { postFavorites, deleteFav, getFavorites };
+const orderCardsFavorites = async (email, order, gender) => {
+  const [dataUser] = await getUserName(email);
+  const cardsUser = await getFavorites(dataUser.id);
+  if (order && gender) {
+    const dataCards = filterCards(cardsUser, gender);
+    if (!dataCards.length) {
+      throw Error(`No se encontro el genero: ${gender}, buscado`);
+    }
+    return orderFuc(dataCards, order, "name");
+  } else if (email && gender === "All") {
+    return cardsUser;
+  } else if (order) {
+    return orderFuc(cardsUser, order, "name");
+  } else if (gender) {
+    const dataCards = filterCards(cardsUser, gender);
+    if (!dataCards.length) {
+      throw Error(`No se encontro el genero: ${gender}, buscado`);
+    }
+    return dataCards;
+  }
+};
+
+module.exports = {
+  postFavorites,
+  deleteFav,
+  getFavorites,
+  orderCardsFavorites,
+};

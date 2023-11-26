@@ -6,7 +6,6 @@ import {
   ORDER_CARDS,
   GET_CHARACTERS,
   GET_ALL_FAVORITES,
-  ID_USER,
   GET_NAME_CHARACTER,
   LOGIN_USER,
   CREATE_USER,
@@ -59,10 +58,18 @@ export const allFavorites = (idUser) => {
   };
 };
 
-export const filterCards = (gender) => {
-  return {
-    type: FILTER_CARDS,
-    payload: gender,
+export const filterCards = ({ email, order, gender }) => {
+  const URL = `http://localhost:3001/rickandmorty/favorite`;
+  return async function (dispatch) {
+    try {
+      const responseRoute = (
+        await axios.get(`${URL}?email=${email}&order=${order}&gender=${gender}`)
+      ).data;
+      dispatch({
+        type: FILTER_CARDS,
+        payload: responseRoute,
+      });
+    } catch (error) {}
   };
 };
 

@@ -55,9 +55,7 @@ const reducer = (state = initialState, { type, payload }) => {
     case FILTER_CARDS:
       return {
         ...state,
-        myFavorites: state.allCharacters.filter(
-          ({ gender }) => gender === payload
-        ),
+        myFavorites: payload.orderCards,
       };
 
     case ORDER_CARDS:

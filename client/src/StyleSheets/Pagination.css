@@ -1,3 +1,10 @@
 .paginacion {  
   color: brown;
 }
+.text-prev{
+  color: black;
+}
+
+.text-next{
+  color: blue;
+}

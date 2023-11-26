@@ -4,6 +4,7 @@ const {
   postFavorites,
   deleteFav,
   getFavorites,
+  orderCardsFavorites,
 } = require("../Controllers/favoritesControllers");
 
 const postFavHandlers = async (request, response) => {
@@ -46,4 +47,46 @@ const allFavorites = async (request, response) => {
   }
 };
 
-module.exports = { postFavHandlers, deleteFavHandlers, allFavorites };
+const orderFavorites = async (request, response) => {
+  try {
+    const { email, order, gender } = request.query;
+    const orderCards = await orderCardsFavorites(email, order, gender);
+    response.status(SUCCESS).json({ orderCards });
+  } catch (error) {
+    response.status(ERROR).json({ error: error.message });
+  }
+};
+
+const clearFavorites = (arr) =>
+  arr.map(
+    ({
+      id,
+      idPerson,
+      name,
+      status,
+      species,
+      gender,
+      origin,
+      image,
+      create,
+    }) => {
+      return {
+        id,
+        idPerson,
+        name,
+        status,
+        species,
+        gender,
+        origin,
+        image,
+        create,
+      };
+    }
+  );
+
+module.exports = {
+  postFavHandlers,
+  deleteFavHandlers,
+  allFavorites,
+  orderFavorites,
+};
