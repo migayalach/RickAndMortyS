@@ -1,5 +1,5 @@
 const SUCCESS = 200;
-const ERROR = 500;
+const ERROR = 400;
 const {
   postUser,
   getIdUser,
