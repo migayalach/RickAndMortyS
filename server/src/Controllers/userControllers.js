@@ -15,6 +15,10 @@ const level = async (str) =>
   });
 
 const postUser = async ({ email, password, idLevel }) => {
+  const existlevel = await Level.findAll();
+  if(!existlevel){
+    throw Error `Por favor agrege niveles de acceso`;
+  }
   const count = await User.count();
   const searchData = await level("admin");
   if (!searchData) {
@@ -26,7 +30,7 @@ const postUser = async ({ email, password, idLevel }) => {
       password: await hashedPassword(`${password}`),
     });
     await createUser.setLevel(searchData[0].idLevel);
-    return { create: true };
+    return `Bienvenido ${email}`;
   } else if (idLevel && !password) {
     const existLevel = await Level.findByPk(idLevel);
     if (!existLevel) {
