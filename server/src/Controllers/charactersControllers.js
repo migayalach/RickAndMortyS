@@ -15,7 +15,7 @@ const getCharacter = async (dataType, id) => {
         image: charcterApi.image,
         status: charcterApi.status,
       };
-      return obj;
+      return [obj];
     }
     throw Error(`La API solo cuenta con 826 personajes`);
   }
