@@ -10,20 +10,20 @@ const getCharacterHandler = async (request, response) => {
   const { id } = request.params;
   const dataType = isNaN(+id) ? "string" : "number";
   try {
-    const character = await getCharacter(dataType, id);
-    response.status(SUCCESS).json(character);
+    const characterData = await getCharacter(dataType, id);
+    response.status(SUCCESS).json({ character: true, characterData });
   } catch (error) {
-    response.status(ERROR).json({ error: error.message });
+    response.status(ERROR).json({ character: false, error: error.message });
   }
 };
 
 const getNameCharacterHandler = async (request, response) => {
   const { name } = request.query;
   try {
-    const characterName = name
+    const characterData = name
       ? await getNameCharacter(name)
       : await getAllCharacter();
-    response.status(SUCCESS).json(characterName);
+    response.status(SUCCESS).json({ character: true, characterData });
   } catch (error) {
     response.status(ERROR).json({
       character: false,
