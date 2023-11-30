@@ -1,40 +1,23 @@
+// COMPONET'S
+
+// HOOK'S
+
+// STYLESHEET'S
+
 const Pagination = ({
-  dataLength,
   itemsPerPage,
+  totalItems,
   currentPage,
   onPageChange,
 }) => {
-  const totalPages = Math.ceil(dataLength / itemsPerPage);
-
-  const handlePageClick = (pageNumber) => {
-    onPageChange(pageNumber);
-  };
-
-  const handlePrevClick = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
-  };
-
-  const handleNextClick = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
-    }
-  };
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
-        <span
-          key={i}
-          onClick={() => handlePageClick(i)}
-          style={{
-            cursor: "pointer",
-            fontWeight: currentPage === i ? "bold" : "normal",
-          }}
-        >
-          {i}
+        <span key={i} className={i === currentPage ? "active" : ""}>
+          <button onClick={() => onPageChange(i)}>{i}</button>
         </span>
       );
     }
@@ -42,19 +25,9 @@ const Pagination = ({
   };
 
   return (
-    <div className="paginacion">
-      {currentPage > 1 && (
-        <span onClick={handlePrevClick} style={{ cursor: "pointer" }}>
-          {"<<Prev "}
-        </span>
-      )}
-      {renderPageNumbers()}
-      {currentPage < totalPages && (
-        <span onClick={handleNextClick} style={{ cursor: "pointer" }}>
-          {" Next>>"}
-        </span>
-      )}
-    </div>
+    <nav>
+      <ul className="pagination">{renderPageNumbers()}</ul>
+    </nav>
   );
 };
 
