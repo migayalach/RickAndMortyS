@@ -5,9 +5,10 @@ import NavBar from "./Components/NavBar";
 // HOOK'S
 import { useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // REDUX
+import { setDataUser } from "./Redux/actions";
 
 // LIBRARY
 
@@ -19,6 +20,7 @@ import "./StyleSheets/App.css";
 const App = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const loginPage = location.pathname === "/";
   const userData = useSelector((state) => state.infoUser);
   const accessUser = userData?.access;
@@ -30,6 +32,21 @@ const App = () => {
       navigate("/");
     }
   }, [accessUser]);
+
+  useEffect(() => {
+    if (loginPage && userData) {
+      navigate("/");
+      dispatch(setDataUser());
+    }
+
+    return () => {};
+  }, [location]);
+
+  useEffect(() => {
+    if (!userData && !accessUser) {
+      navigate("/");
+    }
+  }, [userData]);
 
   return (
     <div className="App">
@@ -48,7 +65,16 @@ const App = () => {
           }
         />
         <Route path="/about" element={<About />} />
-        <Route path="/user" element={<User idUser={userData?.idUser} />} />
+        <Route
+          path="/user"
+          element={
+            <User
+              idUser={userData?.idUser}
+              user={userData?.user}
+              idLevel={userData?.idLevel}
+            />
+          }
+        />
         <Route path="/error" element={<Error />} />
       </Routes>
     </div>
