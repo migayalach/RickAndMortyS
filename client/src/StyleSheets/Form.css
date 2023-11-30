@@ -13,7 +13,7 @@ form {
   margin: auto 500px;
   background-color: #edf2f4;
   border-radius: 10px;
-  opacity: .9;
+  opacity: 0.9;
 }
 
 label {
@@ -59,6 +59,20 @@ label {
 .btn-registro:hover {
   background-color: #ffc300;
   color: #e63946;
+}
+
+.btn-statePassword {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  background-color: #57cc99;
+  color: #43291f;
 }
 
 .text-option {
