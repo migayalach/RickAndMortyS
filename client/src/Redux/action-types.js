@@ -8,3 +8,5 @@ export const ALL_FAVORITE = "ALL_FAVORITE";
 export const FILTER_CARDS = "FILTER_CARDS";
 export const ERROR_STATE = "ERROR_STATE";
 export const AUX_STATE = "AUX_STATE";
+export const PUT_DATA_USER = "PUT_DATA_USER";
+export const SET_DATA_USER = "SET_DATA_USER";
