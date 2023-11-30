@@ -1,4 +1,3 @@
-import orderFuc from "../Utils/toolsFunction";
 import axios from "axios";
 import {
   LOGIN_USER,
@@ -10,6 +9,8 @@ import {
   ALL_FAVORITE,
   FILTER_CARDS,
   AUX_STATE,
+  PUT_DATA_USER,
+  SET_DATA_USER,
   ERROR_STATE,
 } from "./action-types";
 
@@ -108,12 +109,36 @@ export const filterCards = ({ email, order, gender }) => {
   };
 };
 
+export const updateUser = (idUser, idLevel, data) => {
+  data = {
+    idUser,
+    idLevel,
+    ...data,
+  };
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: PUT_DATA_USER,
+        payload: (await axios.put(`${URL}/user`, data)).data,
+      });
+    } catch (error) {}
+  };
+};
+
+export const setDataUser = () => {
+  return function (dispatch) {
+    dispatch({
+      type: SET_DATA_USER,
+    });
+  };
+};
+
 export const auxState = (data) => {
   return function (dispatch) {
     try {
       dispatch({
         type: AUX_STATE,
-        payload: data
+        payload: data,
       });
     } catch (error) {}
   };
