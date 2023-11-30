@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setDataUser } from "./Redux/actions";
 
 // LIBRARY
-
+import Swal from "sweetalert2";
 // CSS
 import "./StyleSheets/App.css";
 
@@ -38,8 +38,6 @@ const App = () => {
       navigate("/");
       dispatch(setDataUser());
     }
-
-    return () => {};
   }, [location]);
 
   useEffect(() => {
