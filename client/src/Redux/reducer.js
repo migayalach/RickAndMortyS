@@ -8,13 +8,15 @@ import {
   REMOVE_CHARACTER,
   FILTER_CARDS,
   AUX_STATE,
+  PUT_DATA_USER,
+  SET_DATA_USER,
   ERROR_STATE,
 } from "./action-types";
 
 const initialState = {
   myFavorites: [],
   characters: [],
-  aux: [],
+  aux: null,
   infoUser: null,
 };
 
@@ -79,6 +81,19 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         aux: payload,
+      };
+
+    case PUT_DATA_USER:
+      return {
+        ...state,
+        aux: payload,
+      };
+
+    case SET_DATA_USER:
+      return {
+        myFavorites: [],
+        characters: [],
+        infoUser: null,
       };
 
     default:
