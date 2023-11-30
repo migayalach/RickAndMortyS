@@ -15,7 +15,7 @@ import validation from "../Utils/validation";
 // STYLESHEET'S
 import "../StyleSheets/Form.css";
 
-const Form = ({ login, signUp }) => {
+const Form = () => {
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState({
