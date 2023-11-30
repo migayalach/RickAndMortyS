@@ -18,6 +18,7 @@ const initialState = {
   characters: [],
   aux: null,
   infoUser: null,
+  error: null,
 };
 
 const reducer = (state = initialState, { type, payload }) => {
@@ -60,7 +61,7 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         myFavorites: payload,
-        aux: [],
+        error: null,
       };
 
     case REMOVE_CHARACTER:
@@ -94,6 +95,13 @@ const reducer = (state = initialState, { type, payload }) => {
         myFavorites: [],
         characters: [],
         infoUser: null,
+      };
+
+    case ERROR_STATE:
+      return {
+        ...state,
+        error: payload,
+        aux: null,
       };
 
     default:
