@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 // JAVASCRIP
 
 // STYLESHEET'S
+import "../StyleSheets/Filter.css";
 
 const Filter = ({ user, characters, orderCharacters }) => {
   const dispatch = useDispatch();
@@ -30,22 +31,26 @@ const Filter = ({ user, characters, orderCharacters }) => {
 
   const searchData = (event) => {
     event.preventDefault();
-    user && dispatch(filterCards(character));
     characters && orderCharacters(character.order, character.gender);
+    user && dispatch(filterCards(character));
   };
 
   return (
     <>
-      <form onSubmit={searchData}>
-        <label htmlFor="Order">Order</label>
-        <select name="order" onChange={handleFilter}>
+      <form className="form-filter" onSubmit={searchData}>
+        <label className="text-filter" htmlFor="Order">
+          Order
+        </label>
+        <select className="text-select" name="order" onChange={handleFilter}>
           <option value=""></option>
           <option value="ASC">Ascendente</option>
           <option value="DESC">Descendente</option>
         </select>
 
-        <label htmlFor="Gender">Gender</label>
-        <select name="gender" onChange={handleFilter}>
+        <label className="text-filter" htmlFor="Gender">
+          Gender
+        </label>
+        <select className="text-select" name="gender" onChange={handleFilter}>
           <option></option>
           <option value="All">All</option>
           <option value="Male">Male</option>
@@ -54,7 +59,9 @@ const Filter = ({ user, characters, orderCharacters }) => {
           <option value="unknown">Unknown</option>
         </select>
         <div>
-          <button type="submit">Buscar</button>
+          <button className="btn-busqueda" type="submit">
+            Buscar
+          </button>
         </div>
       </form>
     </>

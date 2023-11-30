@@ -1,0 +1,41 @@
+.form-filter {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: medium solid white;
+  padding: 10px;
+  justify-content: center;
+  line-height: 2;
+  margin: 50px 750px;
+  background-color: #edf2f4;
+  border-radius: 10px;
+  opacity: 0.9;
+}
+
+.text-filter {
+  color: #386641;
+  text-align: justify;
+  font-size: 20px;
+}
+
+.btn-busqueda{
+  color: #fefae0;
+  background-color: #8ac926;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  font-family: Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  margin-right: 0px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.text-select {
+  color: #432818;
+  font-size: 20px;
+  font-weight: 800;
+}

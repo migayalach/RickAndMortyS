@@ -7,10 +7,10 @@ form {
   flex-direction: column;
   flex-wrap: wrap;
   border: medium solid white;
-  padding: 10px;
+  padding: 20px;
   justify-content: center;
   line-height: 2;
-  margin: auto 500px;
+  margin: 750px;
   background-color: #edf2f4;
   border-radius: 10px;
   opacity: 0.9;
