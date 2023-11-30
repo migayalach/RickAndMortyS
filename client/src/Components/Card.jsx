@@ -1,32 +1,68 @@
+//HOOK'S
+
+//COMPONENT'S
+
+//HOOK'S
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { addFav, removeFav } from "../Redux/actions";
+import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+//JAVASCRIP
+import { addFav, removeFav, deleteCharacter } from "../Redux/actions";
+
+//STYLESHEETS
 import "../StyleSheets/Card.css";
 
 const Card = ({
+  idUser,
   id,
+  idPerson,
   name,
-  origin,
-  status,
-  species,
   gender,
+  species,
+  url,
   image,
-  onClose,
+  status,
+  create,
+  flag,
 }) => {
-  const recipe = useSelector((state) => state.myFavorites);
-  const { idUser } = useSelector((state) => state.infoUser);
   const [isFav, setIsFav] = useState(false);
   const dispatch = useDispatch();
-  const getIdPersonBDD = (idSearch) => {
-    const aux = recipe.filter(({ idPerson }) => idPerson === idSearch);
-    return aux[0].id;
+  const location = useLocation();
+  const selectMyFavorites = useSelector((state) => state.myFavorites);
+  const characters = useSelector((state) => state.characters);
+
+  const clearDataCard = (characters, selectMyFavorites) => {
+    for (let i = 0; i < characters.length; i++) {
+      for (let j = 0; j < selectMyFavorites.length; j++) {
+        if (characters[i].id === selectMyFavorites[j].id) {
+          setIsFav(true);
+        } else {
+          setIsFav(false);
+        }
+      }
+    }
   };
+
+  const onClose = (id) => {
+    const data = characters.filter((characters) => characters.id !== id);
+    if (isFav) {
+      if (flag === "home") {
+        dispatch(removeFav(idUser, id));
+      }
+      clearDataCard(characters, selectMyFavorites);
+    }
+    dispatch(deleteCharacter(data));
+  };
+
   const handleFavorite = () => {
     if (isFav === true) {
-      setIsFav(false);
-      const idPerson = getIdPersonBDD(id);
-      dispatch(removeFav(idUser, idPerson));
+      if (flag === "home") {
+        dispatch(removeFav(idUser, id));
+      } else {
+        setIsFav(false);
+        dispatch(removeFav(idUser, idPerson));
+      }
     } else {
       setIsFav(true);
       dispatch(
@@ -38,20 +74,22 @@ const Card = ({
           species,
           gender,
           image,
-          onClose,
           idUser,
         })
       );
     }
+    if (flag === "home") {
+      clearDataCard(characters, selectMyFavorites);
+    }
   };
 
   useEffect(() => {
-    recipe.forEach((fav) => {
-      if (fav.name === name) {
-        setIsFav(true);
-      }
-    });
-  }, [recipe]);
+    create === true && setIsFav(true);
+    flag === "home" &&
+      selectMyFavorites?.forEach(({ idPerson }) => {
+        idPerson === id && setIsFav(true);
+      });
+  }, [selectMyFavorites]);
 
   return (
     <div className="card-container">
@@ -61,20 +99,21 @@ const Card = ({
         <button onClick={handleFavorite}>🤍</button>
       )}
       <div className="boton">
-        <button
-          className="cerrar"
-          onClick={() =>
-            !isFav
-              ? onClose(id, "noBdd")
-              : onClose(getIdPersonBDD(id), "bdd", id)
-          }
-        >
-          X
-        </button>
+        {location.pathname === "/home" && (
+          <button className="cerrar" onClick={() => onClose(id)}>
+            X
+          </button>
+        )}
       </div>
-      <Link to={`/detail/${id}`}>
-        <h2 className="nombre">{name}</h2>
-      </Link>
+      {location.pathname === "/home" ? (
+        <Link to={`/detail/${id}`}>
+          <h2 className="nombre">{name}</h2>
+        </Link>
+      ) : (
+        <Link to={`/detail/${idPerson}`}>
+          <h2 className="nombre">{name}</h2>
+        </Link>
+      )}
       <img className="imagen" src={image} alt={name} />
       <div className="pie-de-pagina">
         <h2 className="datos">{species}</h2>
