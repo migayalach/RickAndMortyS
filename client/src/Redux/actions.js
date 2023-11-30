@@ -1,69 +1,104 @@
+import orderFuc from "../Utils/toolsFunction";
 import axios from "axios";
 import {
-  ADD_FAV,
-  REMOVE_FAV,
-  FILTER_CARDS,
-  ORDER_CARDS,
-  GET_CHARACTERS,
-  GET_ALL_FAVORITES,
-  GET_NAME_CHARACTER,
   LOGIN_USER,
   CREATE_USER,
+  CHARACTER,
+  REMOVE_CHARACTER,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
+  ALL_FAVORITE,
+  FILTER_CARDS,
+  AUX_STATE,
+  ERROR_STATE,
 } from "./action-types";
 
-const URL = `https://rickandmortyapi.com/api/character`;
+const URL = `http://localhost:3001/rickandmorty`;
 
-export const addFav = (character) => {
-  const endpoint = "http://localhost:3001/rickandmorty/favorite";
-  return async (dispatch) => {
+export const loginUser = (userData) => {
+  return async function (dispatch) {
     try {
-      const responseRoute = (await axios.post(endpoint, character)).data;
       dispatch({
-        type: ADD_FAV,
-        payload: responseRoute,
+        type: LOGIN_USER,
+        payload: (await axios.post(`${URL}/login`, userData)).data,
       });
-    } catch (error) {
-      alert("Error al agregar a favoritos: " + error.message);
-    }
+    } catch (error) {}
+  };
+};
+
+export const createAccount = (userData) => {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: CREATE_USER,
+        payload: (await axios.post(`${URL}/user`, userData)).data,
+      });
+    } catch (error) {}
+  };
+};
+
+export const charactersCollection = (data) => {
+  return function (dispatch) {
+    try {
+      dispatch({
+        type: CHARACTER,
+        payload: data,
+      });
+    } catch (error) {}
+  };
+};
+
+export const deleteCharacter = (data) => {
+  return function (dispatch) {
+    try {
+      dispatch({
+        type: REMOVE_CHARACTER,
+        payload: data,
+      });
+    } catch (error) {}
+  };
+};
+
+export const addFav = (data) => {
+  return async function (dispatch) {
+    try {
+      dispatch({
+        type: ADD_FAVORITE,
+        payload: (await axios.post(`${URL}/favorite`, data)).data,
+      });
+    } catch (error) {}
   };
 };
 
 export const removeFav = (idUser, id) => {
-  const endpoint = `http://localhost:3001/rickandmorty/favorite/${idUser}/${id}`;
-  return async (dispatch) => {
+  return async function (dispatch) {
     try {
-      const responseRoute = (await axios.delete(endpoint)).data;
-      return dispatch({
-        type: REMOVE_FAV,
-        payload: responseRoute,
+      dispatch({
+        type: REMOVE_FAVORITE,
+        payload: (await axios.delete(`${URL}/favorite/${idUser}/${id}`)).data,
       });
-    } catch (error) {
-      alert("Error al eliminar de favoritos: " + error.message);
-    }
+    } catch (error) {}
   };
 };
 
-export const allFavorites = (idUser) => {
-  const enpoint = `http://localhost:3001/rickandmorty/favorite/${idUser}`;
-  return async (dispatch) => {
+export const allFavorite = (data) => {
+  return async function (dispatch) {
     try {
-      const responseGet = (await axios.get(enpoint)).data;
-      return dispatch({
-        type: GET_ALL_FAVORITES,
-        payload: responseGet,
+      dispatch({
+        type: ALL_FAVORITE,
+        payload: (await axios.get(`${URL}/favorite/${data}`)).data,
       });
-    } catch (error) {
-      return { error: error.message };
-    }
+    } catch (error) {}
   };
 };
 
 export const filterCards = ({ email, order, gender }) => {
-  const URL = `http://localhost:3001/rickandmorty/favorite`;
   return async function (dispatch) {
     try {
       const responseRoute = (
-        await axios.get(`${URL}?email=${email}&order=${order}&gender=${gender}`)
+        await axios.get(
+          `${URL}/favorite?email=${email}&order=${order}&gender=${gender}`
+        )
       ).data;
       dispatch({
         type: FILTER_CARDS,
@@ -73,56 +108,12 @@ export const filterCards = ({ email, order, gender }) => {
   };
 };
 
-export const orderCards = (order) => {
-  return {
-    type: ORDER_CARDS,
-    payload: order,
-  };
-};
-
-export const getCharacters = () => {
-  return async function (dispatch) {
-    const apiData = await axios.get(`${URL}`);
-    //SIN PAGINACION
-    const characters = apiData.data.results;
-    dispatch({
-      type: GET_CHARACTERS,
-      payload: characters,
-    });
-  };
-};
-
-export const getNameCharacter = (id) => {
-  return async function (dispatch) {
-    const URL_CHARACTER = `http://localhost:3001/rickandmorty/characters`;
-    const charactersSearch = (await axios.get(`${URL_CHARACTER}?name=${id}`))
-      .data;
-    dispatch({
-      type: GET_NAME_CHARACTER,
-      payload: charactersSearch,
-    });
-  };
-};
-
-export const loginUser = (userData) => {
-  return async function (dispatch) {
+export const auxState = (data) => {
+  return function (dispatch) {
     try {
-      const URL = "http://localhost:3001/rickandmorty/login";
       dispatch({
-        type: LOGIN_USER,
-        payload: (await axios.post(`${URL}`, userData)).data,
-      });
-    } catch (error) {}
-  };
-};
-
-export const createAccount = (userData) => {
-  return async function (dispatch) {
-    try {
-      const URL = "http://localhost:3001/rickandmorty/user";
-      dispatch({
-        type: CREATE_USER,
-        payload: (await axios.post(`${URL}`, userData)).data,
+        type: AUX_STATE,
+        payload: data
       });
     } catch (error) {}
   };
