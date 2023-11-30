@@ -16,8 +16,8 @@ const level = async (str) =>
 
 const postUser = async ({ email, password, idLevel }) => {
   const existlevel = await Level.findAll();
-  if(!existlevel){
-    throw Error `Por favor agrege niveles de acceso`;
+  if (!existlevel) {
+    throw Error`Por favor agrege niveles de acceso`;
   }
   const count = await User.count();
   const searchData = await level("admin");
@@ -120,12 +120,17 @@ const putUser = async (idUser, idLevel, email, password) => {
     throw Error`El nivel no se encuentra registrado`;
   }
   await User.update(
-    { email, password, LevelIdLevel: idLevel },
+    {
+      email,
+      password: await hashedPassword(`${password}`),
+      LevelIdLevel: idLevel,
+    },
     { where: { id: idUser } }
   );
-  const infoUser = await getIdUser(idUser);
-  const getUserAll = await getAllUser();
-  return { infoUser, getUserAll };
+  return {
+    message: "Usuaro actualizado con exito",
+    updateUser: true,
+  };
 };
 
 const userDetele = async (idUser) => {
