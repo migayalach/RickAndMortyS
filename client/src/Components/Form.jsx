@@ -56,6 +56,7 @@ const Form = ({ idUser, idLevel, user }) => {
       dispatch(createAccount(userData));
       event.preventDefault();
     } else if (optionButton === "update-Data") {
+      setUserData({ password: "" });
       dispatch(updateUser(idUser, idLevel, userData));
     }
   };
@@ -100,7 +101,7 @@ const Form = ({ idUser, idLevel, user }) => {
         placeholder="*************"
         required
       />
-      {/* {errors.password && <p className="error">{errors.password}</p>} */}
+      {errors.password && <p className="error">{errors.password}</p>}
       <button
         type="button"
         onClick={() => setShowPassword(!showPassword)}
