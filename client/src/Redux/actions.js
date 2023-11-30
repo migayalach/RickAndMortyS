@@ -23,7 +23,12 @@ export const loginUser = (userData) => {
         type: LOGIN_USER,
         payload: (await axios.post(`${URL}/login`, userData)).data,
       });
-    } catch (error) {}
+    } catch (error) {
+      dispatch({
+        type: ERROR_STATE,
+        payload: error.response.data.error,
+      });
+    }
   };
 };
 
