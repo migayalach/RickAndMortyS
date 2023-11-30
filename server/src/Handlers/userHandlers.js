@@ -46,11 +46,7 @@ const updateUser = async (request, response) => {
   const { idUser, idLevel, email, password } = request.body;
   try {
     const userUpdate = await putUser(idUser, idLevel, email, password);
-    response.status(SUCCESS).json({
-      updateUser: true,
-      message: "Usuaro actualizado con exito",
-      userUpdate,
-    });
+    response.status(SUCCESS).json(userUpdate);
   } catch (error) {
     response.status(ERROR).json({ updateUser: false, error: error.message });
   }
