@@ -1,20 +1,19 @@
 import {
-  ADD_FAV,
-  REMOVE_FAV,
-  FILTER_CARDS,
-  ORDER_CARDS,
-  GET_CHARACTERS,
-  GET_ALL_FAVORITES,
-  GET_NAME_CHARACTER,
   LOGIN_USER,
   CREATE_USER,
+  CHARACTER,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
+  ALL_FAVORITE,
+  REMOVE_CHARACTER,
+  FILTER_CARDS,
+  AUX_STATE,
+  ERROR_STATE,
 } from "./action-types";
-
-import order from "../Functions/reducerClear";
 
 const initialState = {
   myFavorites: [],
-  allCharacters: [],
+  characters: [],
   aux: [],
   infoUser: null,
 };
@@ -31,45 +30,55 @@ const reducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         infoUser: payload.loginUser,
+        aux: [],
       };
 
-    case GET_CHARACTERS:
+    case CHARACTER:
+      return {
+        ...state,
+        characters: [...state.characters, ...payload],
+        aux: [],
+      };
+
+    case ADD_FAVORITE:
       return {
         ...state,
         myFavorites: payload,
-        aux: state.myFavorites,
+        aux: [],
       };
 
-    case GET_ALL_FAVORITES:
+    case REMOVE_FAVORITE:
       return {
         ...state,
         myFavorites: payload,
+        aux: [],
       };
 
-    case ADD_FAV:
-      return { ...state, myFavorites: payload, allCharacters: payload };
+    case ALL_FAVORITE:
+      return {
+        ...state,
+        myFavorites: payload,
+        aux: [],
+      };
 
-    case REMOVE_FAV:
-      return { ...state, myFavorites: payload };
+    case REMOVE_CHARACTER:
+      return {
+        ...state,
+        characters: payload,
+        aux: [],
+      };
 
     case FILTER_CARDS:
       return {
         ...state,
         myFavorites: payload.orderCards,
+        aux: [],
       };
 
-    case ORDER_CARDS:
-      const allCharactersCopy = [...state.allCharacters];
+    case AUX_STATE:
       return {
         ...state,
-        myFavorites: order(allCharactersCopy, payload),
-      };
-
-    case GET_NAME_CHARACTER:
-      return {
-        ...state,
-        myFavorites: payload,
-        aux: state.myFavorites,
+        aux: payload,
       };
 
     default:
