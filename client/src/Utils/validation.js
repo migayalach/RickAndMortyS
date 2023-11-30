@@ -1,3 +1,11 @@
+import {
+  passwordRegexMay_AZ,
+  passwordRegexMin_az,
+  passwordRegexDigits,
+  passwordRegexSpecialCaracter,
+  passwordRegexLength,
+} from "./regex";
+
 const validation = (userData) => {
   const errors = {};
 
@@ -12,12 +20,31 @@ const validation = (userData) => {
       "El nombre de usuario no puede tener mas de 35 caracteres :C";
   }
 
-  if (!/.*\d+.*/.test(userData.password)) {
-    errors.password = "La contraseña debe tener al menos 1 numero";
-  }
-  if (userData.password.length < 6 || userData.password.length > 10) {
-    errors.password =
-      "La contraseña debe tener una longitud entre 6 y 10 caracteres";
+  // password
+  if (!userData.password) {
+    errors.password = "La contraseña no puede estar vacía";
+  } else {
+    if (!passwordRegexMay_AZ.test(userData.password)) {
+      errors.password = "Debe contener al menos una letra mayúscula (A-Z)";
+    }
+
+    if (!passwordRegexMin_az.test(userData.password)) {
+      errors.password = "Debe contener al menos una letra minúscula (a-z)";
+    }
+
+    if (!passwordRegexDigits.test(userData.password)) {
+      errors.password = "Debe contener al menos un dígito (0-9)";
+    }
+
+    if (!passwordRegexSpecialCaracter.test(userData.password)) {
+      errors.password =
+        "Debe contener al menos uno de los siguientes caracteres especiales: @, #, $, %, ^, &, +, =, !, _ ";
+    }
+
+    if (!passwordRegexLength.test(userData.password)) {
+      errors.password =
+        "La longitud mínima de la contraseña debe ser de 8 caracteres.";
+    }
   }
 
   return errors;
